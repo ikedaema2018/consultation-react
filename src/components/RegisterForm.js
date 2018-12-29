@@ -9,7 +9,7 @@ class RegisterInput extends Component {
 
 	  this.state = {
   		data: {name: '', email: ''},
-      message: {name: ["名前の入力は必須です"], email: ["メールアドレスの入力は必須です"]},
+      message: {name: ["名前の入力は必須です"], email: ["メールアドレスの入力は必須です"], password: ["passwordの入力は必須です"]},
 	  }
 		this.checkValue = this.checkValue.bind(this)
   }
@@ -47,6 +47,23 @@ class RegisterInput extends Component {
 					message.email.push("正しいメールアドレスを入力してください")
 			  }
 			  break
+		  case "password":
+
+		  	data.password = val
+			  message.password = []
+
+			  if(val.length === 0) {
+				  message.password.push("パスワードの入力は必須です")
+			  }
+
+			  if(val.length > 6) {
+			  	message.password.push("パスワードは6文字以上にしてください")
+			  }
+
+			  if (!val.match(/[a-z]/) || !val.match(/[A-Z]/)) {
+			  	message.password.push("大文字と小文字のアルファベット一文字以上づつ含んでください")
+			  }
+			  break
 
 		  default:
 			  break
@@ -55,13 +72,20 @@ class RegisterInput extends Component {
   }
 
 
+
+
 	render() {
+
   	let name = {data: this.state.data.name, message: this.state.message.name, checkValue: this.checkValue}
   	let email = {data: this.state.data.email, message: this.state.message.email, checkValue: this.checkValue}
+  	let password = {data: this.state.data.password, message: this.state.message.password, checkValue: this.checkValue}
+
+
 		return(
 			<ul>
-				<NameInput checkValue={this.checkValue} {...name}/>
-				<EmailInput checkValue={this.checkValue} {...email} />
+				<NameInput  {...name}/>
+				<EmailInput {...email} />
+				<PasswordInput {...password} />
 			</ul>
 		)
 	}
@@ -69,12 +93,10 @@ class RegisterInput extends Component {
 
 class NameInput extends Component {
 		render(){
-			console.log(this.props.message)
-			console.log(this.props.data)
 			return (
 				<li>
 					<label>名前</label>
-					{this.props.message !== [] ? <p className={"error-message"}>{this.props.message}</p> : <p></p>}
+					{this.props.message !== [] ? <p className={"error-message"}>{this.props.message[0]}</p> : <p></p>}
 					<input type={"text"} name={"name"} onChange={this.props.checkValue} value={this.props.name}></input>
 				</li>
 			)
@@ -82,7 +104,8 @@ class NameInput extends Component {
 }
 NameInput.propTypes= {
 	checkValue: PropTypes.func,
-	name: PropTypes.string
+  data: PropTypes.string,
+	message: PropTypes.array
 }
 
 class EmailInput extends Component {
@@ -90,7 +113,7 @@ class EmailInput extends Component {
   		return (
   			<li>
 				  <label>メールアドレス</label>
-				  {this.props.message !== [] ? <p className={"error-message"}>{this.props.message}</p> : <p></p>}
+				  {this.props.message !== [] ? <p className={"error-message"}>{this.props.message[0]}</p> : <p></p>}
 				  <input type={"text"} name={"email"} onChange={this.props.checkValue} value={this.props.email} />
 			  </li>
 		  )
@@ -98,8 +121,28 @@ class EmailInput extends Component {
 }
 
 EmailInput.propTypes = {
-  checkValue: PropTypes.func,
-	email: PropTypes.string
+	checkValue: PropTypes.func,
+	data: PropTypes.string,
+	message: PropTypes.array
+}
+
+class PasswordInput extends Component {
+	render() {
+		console.log(this.props.message)
+		return (
+			<li>
+				<label>パスワード</label>
+				{this.props.message !== [] ? <p className={"error-message"}>{this.props.message[0]}</p> : <p></p>}
+				<input type={"text"} name={"password"} onChange={this.props.checkValue} value={this.props.password} />
+			</li>
+		)
+	}
+}
+
+PasswordInput.propTypes = {
+	checkValue: PropTypes.func,
+	data: PropTypes.string,
+	message: PropTypes.array
 }
 
 export default RegisterInput;
