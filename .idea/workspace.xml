@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="20f10bf0-fb23-4aec-bc55-8c9266d03aaa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegisterForm.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -41,8 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/RegisterForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="108" column="69" lean-forward="true" selection-start-line="108" selection-start-column="69" selection-end-line="108" selection-end-column="69" />
+            <state relative-caret-position="431">
+              <caret line="102" column="136" lean-forward="true" selection-start-line="102" selection-start-column="136" selection-end-line="102" selection-end-column="136" />
             </state>
           </provider>
         </entry>
@@ -70,6 +68,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>[0]</find>
+      <find>console</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -187,12 +186,12 @@
       <updated>1545982668357</updated>
       <workItem from="1545982669661" duration="4042000" />
       <workItem from="1546012094680" duration="14041000" />
-      <workItem from="1546090274402" duration="5182000" />
+      <workItem from="1546090274402" duration="11824000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30556000" />
+    <option name="totallyTimeSpent" value="37198000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="826" extended-state="6" />
@@ -258,8 +257,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/RegisterForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="108" column="69" lean-forward="true" selection-start-line="108" selection-start-column="69" selection-end-line="108" selection-end-column="69" />
+        <state relative-caret-position="431">
+          <caret line="102" column="136" lean-forward="true" selection-start-line="102" selection-start-column="136" selection-end-line="102" selection-end-column="136" />
         </state>
       </provider>
     </entry>
