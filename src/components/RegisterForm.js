@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import '../css/register-form.css'
 
 class RegisterInput extends Component {
 
@@ -7,36 +8,63 @@ class RegisterInput extends Component {
   	super(props)
 
 	  this.state = {
-  		name: '', email: '', password: '', gender: '', age: ''
+  		data: {name: ''},
+      message: {name: ["名前の入力は必須です"]},
 	  }
-	  this.nameOnChange = this.nameOnChange.bind(this)
+		this.checkValue = this.checkValue.bind(this)
   }
 
-  nameOnChange(e) {
-  	this.setState({name: e.target.value})
+
+  checkValue(event) {
+  	let type = event.target.name
+	  let val = event.target.value
+
+	  var {data, message, status} = this.state
+
+	  switch (type) {
+		  case "name":
+		  	data.name = val
+			  message.name = []
+
+			  if(val.length > 10) {
+				  message.name.push("名前は10文字以内で入力してください")
+			  }
+			  if(val.length === '') {
+				  message.name.push("名前の入力は必須です")
+			  }
+			  break
+		  default:
+			  break
+	  }
+	  this.setState({data: data, message: message, status: status})
   }
 
 
 	render() {
+  	let name = {data: this.state.data.name, message: this.state.message.name, checkValue: this.checkValue}
 		return(
 			<ul>
-				<NameInput nameOnChange={this.nameOnChange} name={this.state.name}/>
+				<NameInput checkValue={this.checkValue} {...name}/>
 			</ul>
 		)
 	}
 }
 
-const NameInput = (props) => {
-  	console.log(props.name)
-	return (
-		<li>
-			<label>名前</label>
-			<input type={"text"} name={"name"} onChange={props.nameOnChange} value={props.name}></input>
-		</li>
-	)
+class NameInput extends Component {
+		render(){
+			console.log(this.props.message)
+			console.log(this.props.data)
+			return (
+				<li>
+					<label>名前</label>
+					{this.props.message !== [] ? <p className={"error-message"}>{this.props.message}</p> : <p></p>}
+					<input type={"text"} name={"name"} onChange={this.props.checkValue} value={this.props.name}></input>
+				</li>
+			)
+		}
 }
 NameInput.propTypes= {
-	nameOnChange: PropTypes.func,
+	checkValue: PropTypes.func,
 	name: PropTypes.string
 }
 
