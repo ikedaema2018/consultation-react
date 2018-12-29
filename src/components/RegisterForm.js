@@ -8,8 +8,8 @@ class RegisterInput extends Component {
   	super(props)
 
 	  this.state = {
-  		data: {name: ''},
-      message: {name: ["名前の入力は必須です"]},
+  		data: {name: '', email: ''},
+      message: {name: ["名前の入力は必須です"], email: ["メールアドレスの入力は必須です"]},
 	  }
 		this.checkValue = this.checkValue.bind(this)
   }
@@ -29,10 +29,25 @@ class RegisterInput extends Component {
 			  if(val.length > 10) {
 				  message.name.push("名前は10文字以内で入力してください")
 			  }
-			  if(val.length === '') {
+			  if(val.length === 0) {
 				  message.name.push("名前の入力は必須です")
 			  }
 			  break
+		  case "email":
+		  	data.email = val
+			  message.email = []
+
+			  //呪文
+			  var regexp = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
+
+			  if(val.length === 0) {
+			  	message.email.push("メールアドレスの入力は必須です")
+			  }
+			  if(!regexp.test(val)) {
+					message.email.push("正しいメールアドレスを入力してください")
+			  }
+			  break
+
 		  default:
 			  break
 	  }
@@ -42,9 +57,11 @@ class RegisterInput extends Component {
 
 	render() {
   	let name = {data: this.state.data.name, message: this.state.message.name, checkValue: this.checkValue}
+  	let email = {data: this.state.data.email, message: this.state.message.email, checkValue: this.checkValue}
 		return(
 			<ul>
 				<NameInput checkValue={this.checkValue} {...name}/>
+				<EmailInput checkValue={this.checkValue} {...email} />
 			</ul>
 		)
 	}
@@ -66,6 +83,23 @@ class NameInput extends Component {
 NameInput.propTypes= {
 	checkValue: PropTypes.func,
 	name: PropTypes.string
+}
+
+class EmailInput extends Component {
+  	render() {
+  		return (
+  			<li>
+				  <label>メールアドレス</label>
+				  {this.props.message !== [] ? <p className={"error-message"}>{this.props.message}</p> : <p></p>}
+				  <input type={"text"} name={"email"} onChange={this.props.checkValue} value={this.props.email} />
+			  </li>
+		  )
+	  }
+}
+
+EmailInput.propTypes = {
+  checkValue: PropTypes.func,
+	email: PropTypes.string
 }
 
 export default RegisterInput;
