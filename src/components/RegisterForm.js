@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import '../css/register-form.css'
+import Reboot from 'material-ui/Reboot'
+import AppBar from 'material-ui/AppBar'
+import Button from 'material-ui/Button'
+
 
 class RegisterInput extends Component {
 
@@ -8,9 +12,9 @@ class RegisterInput extends Component {
   	super(props)
 
 	  this.state = {
-  		data: {name: '', email: '', password: '', password_confirmation: '', gender: '男', introduction: ''},
+  		data: {name: '', email: '', password: '', password_confirmation: '', gender: '男', age: '', introduction: ''},
       message: {name: ["名前の入力は必須です"], email: ["メールアドレスの入力は必須です"],
-			password: ["passwordの入力は必須です"], password_confirmation: ["１つ目と同じpasswordを入力してください"], introduction: []},
+			password: ["passwordの入力は必須です"], password_confirmation: ["１つ目と同じpasswordを入力してください"], age: ['年齢を選択してください'], introduction: []},
 	  }
 		this.checkValue = this.checkValue.bind(this)
 	  this.sendData = this.sendData.bind(this)
@@ -82,6 +86,16 @@ class RegisterInput extends Component {
 			case "gender":
 				data.gender = val
 				break
+		  
+		  case "age":
+		  	data.age = val
+			  console.log(val)
+			  message.age = []
+			  if(!val) {
+			  	message.age.push("年齢を選択してください")
+			  }
+			  break
+			  
 			case "introduction":
 				data.introduction = val
 				message.introduction = []
@@ -100,11 +114,11 @@ class RegisterInput extends Component {
   }
 
 	sendData() {
-  	alert(`${this.state.data.name}さんのメールアドレスは${this.state.data.email}で性別は${this.state.data.gender}、自己紹介は${this.state.data.introduction}`)
+  	alert(`${this.state.data.name}さんのメールアドレスは${this.state.data.email}で性別は${this.state.data.gender}、年齢は${this.state.data.age}、自己紹介は${this.state.data.introduction}`)
     this.setState({
-	    data: {name: '', email: '', password: '', password_confirmation: '', gender: '男', introduction: ''},
+	    data: {name: '', email: '', password: '', password_confirmation: '', gender: '男', age: '', introduction: ''},
 	    message: {name: ["名前の入力は必須です"], email: ["メールアドレスの入力は必須です"],
-		    password: ["passwordの入力は必須です"], password_confirmation: ["１つ目と同じpasswordを入力してください"], introduction: []},
+		    password: ["passwordの入力は必須です"], password_confirmation: ["１つ目と同じpasswordを入力してください"], age: ["年齢を選択してください"], introduction: []},
     })
 	}
 
@@ -117,16 +131,19 @@ class RegisterInput extends Component {
   	let password = {data: this.state.data.password, message: this.state.message.password, checkValue: this.checkValue}
   	let password_confirmation = {data: this.state.data.password_confirmation, message: this.state.message.password_confirmation, checkValue: this.checkValue}
     let gender = {data: this.state.data.gender, checkValue: this.checkValue}
+    let age = {data: this.state.data.age, message: this.state.message.age, checkValue: this.checkValue}
     let introduction = {data: this.state.data.introduction, message: this.state.message.introduction, checkValue: this.checkValue}
 		
   
 		return(
-			<ul>
+			<ul　style={{listStyle: "none"}}>
+				<Reboot />
 				<NameInput  {...name}/>
 				<EmailInput {...email} />
 				<PasswordInput {...password} />
 				<PasswordConfirmationInput {...password_confirmation} />
 				<GenderInput {...gender} />
+				<AgeInput {...age}/>
 				<IntroductionInput {...introduction} />
 				<SendButton sendData={this.sendData} message={this.state.message}/>
 			</ul>
@@ -228,17 +245,39 @@ class IntroductionInput extends Component {
 			<li>
 				<label>自己紹介</label>
 				{this.props.message !== [] ? <p className={"error-message"}>{this.props.message[0]}</p> : <p></p>}
-				<textarea name={"introduction"} onChange={this.props.checkValue} defaultValue={this.props.data}></textarea>
+				<textarea name={"introduction"} onChange={this.props.checkValue} value={this.props.data}></textarea>
 			</li>
 		)
 	}
 }
+
+
 
 IntroductionInput.propTypes = {
 	checkValue: PropTypes.func,
 	data: PropTypes.string,
 	message: PropTypes.array
 }
+
+
+class AgeInput extends Component {
+	render() {
+		return (
+			<li>
+				<label>年齢</label>
+				{this.props.message !== [] ? <p className={"error-message"}>{this.props.message[0]}</p> : <p></p>}
+				<input type={"number"} name={"age"} onChange={this.props.checkValue} value={this.props.data} />
+			</li>
+		)
+	}
+}
+
+AgeInput.propTypes = {
+	checkValue: PropTypes.func,
+	data: PropTypes.string,
+	message: PropTypes.array
+}
+
 
 class SendButton extends Component {
 	checkError = (mes) => {
@@ -254,7 +293,7 @@ class SendButton extends Component {
 	render() {
 		return (
 			<li>
-				<button onClick={this.props.sendData} disabled={this.checkError(this.props.message)} >送信</button>
+				<Button raised color={"primary"} onClick={this.props.sendData} disabled={this.checkError(this.props.message)} >送信</Button>
 			</li>
 		)
 	}
