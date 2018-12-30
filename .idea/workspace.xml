@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="20f10bf0-fb23-4aec-bc55-8c9266d03aaa" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="20f10bf0-fb23-4aec-bc55-8c9266d03aaa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/AppHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegisterForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/register-form.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/register-form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+    </list>
+>>>>>>> origin/issue-5-create-header
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -52,8 +65,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/RegisterForm.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="-1983">
               <caret line="11" column="39" lean-forward="true" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+=======
+            <state relative-caret-position="151">
+              <caret line="251" column="36" selection-start-line="251" selection-start-column="36" selection-end-line="251" selection-end-column="36" />
+>>>>>>> origin/issue-5-create-header
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -203,12 +221,20 @@
       <updated>1545982668357</updated>
       <workItem from="1545982669661" duration="4042000" />
       <workItem from="1546012094680" duration="14041000" />
+<<<<<<< HEAD
       <workItem from="1546090274402" duration="22994000" />
+=======
+      <workItem from="1546090274402" duration="22800000" />
+>>>>>>> origin/issue-5-create-header
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="48368000" />
+=======
+    <option name="totallyTimeSpent" value="48174000" />
+>>>>>>> origin/issue-5-create-header
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -287,8 +313,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/RegisterForm.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="-1983">
           <caret line="11" column="39" lean-forward="true" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+=======
+        <state relative-caret-position="151">
+          <caret line="251" column="36" selection-start-line="251" selection-start-column="36" selection-end-line="251" selection-end-column="36" />
+>>>>>>> origin/issue-5-create-header
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
