@@ -3,3 +3,11 @@
 	color: red;
 	font-style: italic;
 }
+
+.register-ul {
+	list-style: none;
+}
+
+.register-ul li {
+	margin-bottom: 1em;
+}
