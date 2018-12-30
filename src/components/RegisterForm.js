@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import '../css/register-form.css'
-import Reboot from 'material-ui/Reboot'
-import AppBar from 'material-ui/AppBar'
-import Button from 'material-ui/Button'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import InputLabel from '@material-ui/core/InputLabel';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import FilledInput from '@material-ui/core/FilledInput';
 
 
 class RegisterInput extends Component {
@@ -136,8 +139,7 @@ class RegisterInput extends Component {
 		
   
 		return(
-			<ul　style={{listStyle: "none"}}>
-				<Reboot />
+			<ul className={"register-ul"}>
 				<NameInput  {...name}/>
 				<EmailInput {...email} />
 				<PasswordInput {...password} />
@@ -155,9 +157,9 @@ class NameInput extends Component {
 		render(){
 			return (
 				<li>
-					<label>名前</label>
+					<InputLabel>名前</InputLabel>
 					{this.props.message !== [] ? <p className={"error-message"}>{this.props.message[0]}</p> : <p></p>}
-					<input type={"text"} name={"name"} onChange={this.props.checkValue} value={this.props.data}></input>
+					<TextField type={"text"} name={"name"} onChange={this.props.checkValue} value={this.props.data}></TextField>
 				</li>
 			)
 		}
@@ -172,9 +174,9 @@ class EmailInput extends Component {
   	render() {
   		return (
   			<li>
-				  <label>メールアドレス</label>
+				  <InputLabel>メールアドレス</InputLabel>
 				  {this.props.message !== [] ? <p className={"error-message"}>{this.props.message[0]}</p> : <p></p>}
-				  <input type={"text"} name={"email"} onChange={this.props.checkValue} value={this.props.data} />
+				  <TextField type={"text"} name={"email"} onChange={this.props.checkValue} value={this.props.data} />
 			  </li>
 		  )
 	  }
@@ -190,9 +192,9 @@ class PasswordInput extends Component {
 	render() {
 		return (
 			<li>
-				<label>パスワード</label>
+				<InputLabel>パスワード</InputLabel>
 				{this.props.message !== [] ? <p className={"error-message"}>{this.props.message[0]}</p> : <p></p>}
-				<input type={"text"} name={"password"} onChange={this.props.checkValue} value={this.props.data} />
+				<TextField type={"text"} name={"password"} onChange={this.props.checkValue} value={this.props.data} />
 			</li>
 		)
 	}
@@ -208,9 +210,9 @@ class PasswordConfirmationInput extends Component {
 	render() {
 		return (
 			<li>
-				<label>パスワードの確認</label>
+				<InputLabel>パスワードの確認</InputLabel>
 				{this.props.message !== [] ? <p className={"error-message"}>{this.props.message[0]}</p> : <p></p>}
-				<input type={"text"} name={"password_confirmation"} onChange={this.props.checkValue} value={this.props.data} />
+				<TextField type={"text"} name={"password_confirmation"} onChange={this.props.checkValue} value={this.props.data} />
 			</li>
 		)
 	}
@@ -226,9 +228,11 @@ class GenderInput extends Component {
 		render() {
 			return (
 				<li>
-					<label>性別</label>
-					<label>男<input type={"radio"} name={"gender"} onChange={this.props.checkValue} checked={this.props.data === "男"} value={"男"} /></label>
-					<label>女<input type={"radio"} name={"gender"} onChange={this.props.checkValue} checked={this.props.data === "女"} value={"女"} /></label>
+					<RadioGroup>
+						<InputLabel>性別</InputLabel>
+						<InputLabel><Radio name={"gender"} onChange={this.props.checkValue} checked={this.props.data === "男"} value={"男"} />男</InputLabel>
+						<InputLabel><Radio name={"gender"} onChange={this.props.checkValue} checked={this.props.data === "女"} value={"女"} />女</InputLabel>
+					</RadioGroup>
 				</li>
 			)
 		}
@@ -243,9 +247,9 @@ class IntroductionInput extends Component {
 	render() {
 		return (
 			<li>
-				<label>自己紹介</label>
+				<InputLabel>自己紹介</InputLabel>
 				{this.props.message !== [] ? <p className={"error-message"}>{this.props.message[0]}</p> : <p></p>}
-				<textarea name={"introduction"} onChange={this.props.checkValue} value={this.props.data}></textarea>
+				<FilledInput multiline={true} name={"introduction"} onChange={this.props.checkValue} value={this.props.data}></FilledInput>
 			</li>
 		)
 	}
@@ -264,9 +268,9 @@ class AgeInput extends Component {
 	render() {
 		return (
 			<li>
-				<label>年齢</label>
+				<InputLabel>年齢</InputLabel>
 				{this.props.message !== [] ? <p className={"error-message"}>{this.props.message[0]}</p> : <p></p>}
-				<input type={"number"} name={"age"} onChange={this.props.checkValue} value={this.props.data} />
+				<TextField type={"number"} name={"age"} onChange={this.props.checkValue} value={this.props.data} />
 			</li>
 		)
 	}
@@ -293,7 +297,7 @@ class SendButton extends Component {
 	render() {
 		return (
 			<li>
-				<Button raised color={"primary"} onClick={this.props.sendData} disabled={this.checkError(this.props.message)} >送信</Button>
+				<Button raised={"true"} color={"secondary"} onClick={this.props.sendData} disabled={this.checkError(this.props.message)} >送信</Button>
 			</li>
 		)
 	}
