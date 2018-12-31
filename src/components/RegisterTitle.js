@@ -7,7 +7,7 @@ class RegisterTitle extends Component {
 		return (
 			<div className={"register-title-block"}>
 				<h1 className={"register-title"}>会員登録お願いします</h1>
-				<Divider light={"true"} variant={"middle"}></Divider>
+				<Divider light={true} variant={"middle"}></Divider>
 			</div>
 		)
 	}

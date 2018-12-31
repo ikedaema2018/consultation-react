@@ -7,6 +7,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FilledInput from '@material-ui/core/FilledInput';
+import axios from 'axios'
+axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 
 class RegisterInput extends Component {
@@ -117,7 +119,35 @@ class RegisterInput extends Component {
   }
 
 	sendData() {
-  	alert(`${this.state.data.name}さんのメールアドレスは${this.state.data.email}で性別は${this.state.data.gender}、年齢は${this.state.data.age}、自己紹介は${this.state.data.introduction}`)
+		
+		let params = new URLSearchParams();
+		params = {
+			user: {}
+		}
+		
+		console.log(params["user"])
+		
+  	
+  	let user = {
+		  name: this.state.data.name,
+		  email: this.state.data.email,
+		  password: this.state.data.password,
+		  password_confirmationa: this.state.data.password_confirmation,
+		  gender: this.state.data.gender,
+		  age: this.state.data.age,
+		  introduction: this.state.data.introduction
+	  }
+	  
+	  for (let key in user) {
+	  	params["user"][key] = user[key]
+	  }
+  	
+		
+    axios.post('http://localhost:3000/users', params)
+	    .then((result) => {
+    	  console.log(result)
+    })
+		
     this.setState({
 	    data: {name: '', email: '', password: '', password_confirmation: '', gender: '男', age: '', introduction: ''},
 	    message: {name: ["名前の入力は必須です"], email: ["メールアドレスの入力は必須です"],
