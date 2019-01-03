@@ -12,7 +12,7 @@ export default function RegisterForm({inputRegisterInfo, data, message}) {
 		<ul className={"register-ul"}>
 			<li>
 				<InputLabel>名前</InputLabel>
-				{/*{this.props.message ? <p className={"error-message"}>{this.props.message[0]}</p> : <p></p>}*/}
+				{message.name ? <p className={"error-message"}>{message.name[0]}</p> : <p></p>}
 				<TextField type={"text"} name={"name"} onChange={(e) => inputRegisterInfo(e.target)  }  ></TextField>
 			</li>
 			{/*<li>*/}
