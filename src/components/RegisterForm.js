@@ -31,7 +31,7 @@ class RegisterInput extends Component {
 	  let val = event.target.value
 
 	  var {data, message} = this.state
-
+	  
 	  switch (type) {
 		  case "name":
 		  	data.name = val
@@ -112,7 +112,6 @@ class RegisterInput extends Component {
 		  
 		  default:
 			  break
-		  
 	  }
 	  
 	  this.setState({data: data, message: message})
@@ -163,6 +162,7 @@ class RegisterInput extends Component {
 			    }
 		    }
 	    }
+	    alert("不明なエラーが発生しました。電波の状態を確かめてください")
     })
 	}
 
