@@ -4,3 +4,7 @@ export const inputRegisterInfo = (info) => ({
 		info
 	}
 })
+
+export const sendRegisterInfo = () => ({
+	type: 'SEND_INFO'
+})
