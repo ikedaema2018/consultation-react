@@ -1,17 +1,19 @@
 import React from 'react';
-import { createStore } from 'redux'
 import ReactDOM from 'react-dom';
 // import App from './components/App';
-import registerInfosReducer from './reducers/register_infos'
 import { Provider } from 'react-redux'
 import RegisterForm from './containers/register_infos'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import configureStore from './stores/configureStore'
 
 
-const store = createStore(registerInfosReducer)
+const store = configureStore()
 
 ReactDOM.render(
 	<Provider store={store}>
-		< RegisterForm />
+		<Router>
+			<Route path={"/"} component={RegisterForm} />
+		</Router>
 	</Provider>
 	,
 	document.getElementById('root')

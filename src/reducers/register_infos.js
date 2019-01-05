@@ -5,10 +5,11 @@ const initialState = {
 	data: { name: '', email: '', password: '', password_confirmation: '', gender: '男', age: '', introduction: '' },
 	message: {name: ["名前の入力は必須です"], email: ["メールアドレスの入力は必須です"],
 	password: ["passwordの入力は必須です"], password_confirmation: ["１つ目と同じpasswordを入力してください"], age: ['年齢を選択してください'], introduction: []},
-	send_flag: false
+	sendFlag: false,
+	registerFlag: false
 }
 
-export default function registerInfosReducer(state = initialState, action) {
+export const registerInfosReducer = (state = initialState, action) => {
 	switch (action.type) {
 		
 		case 'INPUT_INFO':
@@ -21,12 +22,33 @@ export default function registerInfosReducer(state = initialState, action) {
 					...initialState.data,
 					[action.payload.info.name]: initialState.data[action.payload.info.name] = action.payload.info.value
 				},
-				send_flag: errorCheck(initialState.message)
+				sendFlag: errorCheck(initialState.message)
 			}
 		case 'SEND_INFO':
-			return {
-				...sendData()
-			}
+			let params = {
+				user: {
+					name: initialState.data.name,
+					email: initialState.data.email,
+					password: initialState.data.password,
+					password_confirmation: initialState.data.password_confirmation,
+					gender: initialState.data.gender,
+					age: initialState.data.age,
+					introduction: initialState.data.introduction
+				}
+			};
+			
+			sendData(params).then(() => {
+				console.log("2")
+				console.log(initialState)
+				return {
+					...initialState
+				}
+			}).catch(() => {
+				return {
+					...initialState
+				}
+			})
+			console.log(3)
 		default:
 			console.log(`${action.type}は許容されていないアクションです`)
 			return state
@@ -107,46 +129,40 @@ function checkValue(info){
 	return initialState.message
 }
 
-function sendData() {
+function sendData(params) {
 	
-	let params = {
-		user: {
-			name: initialState.data.name,
-			email: initialState.data.email,
-			password: initialState.data.password,
-			password_confirmation: initialState.data.password_confirmation,
-			gender: initialState.data.gender,
-			age: initialState.data.age,
-			introduction: initialState.data.introduction
-		}
-	};
-	
-	axios.post('http://localhost:3000/users', params)
-		.then((result) => {
+	return new Promise((resolve, reject) => (
+		axios.post('http://localhost:3000/users', params)
+			.then((result) => {
 				initialState.data = {name: '', email: '', password: '', password_confirmation: '', gender: '男', age: '', introduction: ''}
 				initialState.message = {name: ["名前の入力は必須です"], email: ["メールアドレスの入力は必須です"],
 					password: ["passwordの入力は必須です"], password_confirmation: ["１つ目と同じpasswordを入力してください"], age: ["年齢を選択してください"], introduction: []}
-		})
-		.catch((error) => {
-			if (error.response) {
-				if (error.response.data.error) {
-					console.log(error.response.data.error)
-					if (error.response.data.error === "RecordNotUnique") {
-						alert("ユーザー登録に失敗しました。すでに使用されているメールアドレスは使用できません")
-						initialState.message.email.push("同じメールアドレスで登録することはできません")
+				initialState.registerFlag = true
+				console.log(1)
+				return resolve(1)
+				
+			})
+			.catch((error) => {
+				if (error.response) {
+					if (error.response.data.error) {
+						console.log(error.response.data.error)
+						if (error.response.data.error === "RecordNotUnique") {
+							// alert("ユーザー登録に失敗しました。すでに使用されているメールアドレスは使用できません")
+							initialState.message.email.push("同じメールアドレスで登録することはできません")
+						}
 					}
 				}
-			}
-			alert("不明なエラーが発生しました。電波の状態を確かめてください")
-		})
-	return initialState
+				return reject(2)
+			})
+	))
+	
 }
 
 function errorCheck(mes) {
 	for (let key in mes) {
 		if (mes[key].length !== 0) {
-			return true
+			return false
 		}
 	}
-	return false
+	return true
 }

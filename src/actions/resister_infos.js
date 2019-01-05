@@ -8,3 +8,4 @@ export const inputRegisterInfo = (info) => ({
 export const sendRegisterInfo = () => ({
 	type: 'SEND_INFO'
 })
+
