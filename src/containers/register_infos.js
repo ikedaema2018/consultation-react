@@ -4,10 +4,11 @@ import RegisterForm from '../components/register_infos'
 
 function mapStateToProps(state) {
 	return {
-		data: state.registerInfosReducer.data,
-		message: state.registerInfosReducer.message,
-		sendFlag: state.registerInfosReducer.sendFlag,
-		registerFlag: state.registerInfosReducer.registerFlag
+		data: state.rootReducer.registerInfosReducer.data,
+		message: state.rootReducer.registerInfosReducer.message,
+		sendFlag: state.rootReducer.registerInfosReducer.sendFlag,
+		registerModalFlag: state.rootReducer.registerInfosReducer.registerModalFlag,
+		registerModalStatus: state.rootReducer.registerInfosReducer.registerModalStatus
 	}
 }
 
@@ -18,8 +19,8 @@ function mapDispatchToProps(dispatch) {
 		inputRegisterInfo(info) {
 			dispatch(inputRegisterInfo(info))
 		},
-		sendRegisterInfo() {
-			dispatch(sendRegisterInfo())
+		sendRegisterInfo(userInfo) {
+			dispatch(sendRegisterInfo(userInfo))
 		}
 	}
 }

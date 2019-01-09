@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import RegisterForm from './containers/register_infos'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import configureStore from './stores/configureStore'
+import configureStore from './components/configureStore'
 
 
 const store = configureStore()
@@ -13,6 +13,7 @@ ReactDOM.render(
 	<Provider store={store}>
 		<Router>
 			<Route path={"/"} component={RegisterForm} />
+			{/*<Route path={"/login"} component={LoginFrom}>*/}
 		</Router>
 	</Provider>
 	,
