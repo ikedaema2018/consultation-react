@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import RegisterInput from './RegisterForm.js'
+import RegisterForm from './RegisterForm.js'
 import AppHeader from './AppHeader.js'
 import RegisterTitle from './RegisterTitle.js'
+import { Switch, Route} from 'react-router-dom';
 
 class App extends Component {
   constructor(props){
@@ -13,7 +14,9 @@ class App extends Component {
       <div className={"App"}>
         <AppHeader />
         <RegisterTitle />
-        <RegisterInput />
+        <Switch>
+          <Route path="/" component={RegisterForm} />
+        </Switch>
       </div>
     );
   }

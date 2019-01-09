@@ -1,20 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import App from './components/App';
+import App from './components/App';
 import { Provider } from 'react-redux'
-import RegisterForm from './containers/register_infos'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import configureStore from './components/configureStore'
+import configureStore from './configureStore'
+import { ConnectedRouter } from 'react-router-redux'; // 追加
+import createBrowserHistory from 'history/createBrowserHistory'; // 追加
 
 
 const store = configureStore()
+const history = createBrowserHistory();
 
 ReactDOM.render(
 	<Provider store={store}>
-		<Router>
-			<Route path={"/"} component={RegisterForm} />
-			{/*<Route path={"/login"} component={LoginFrom}>*/}
-		</Router>
+		<ConnectedRouter history={history}>
+			<App />
+		</ConnectedRouter>
 	</Provider>
 	,
 	document.getElementById('root')
