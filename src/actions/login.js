@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = "https://localhost:3000"
+const url = "http://localhost:3000/admin_users"
 
 export const inputLoginForm = (info) => ({
 	type: "INPUT_LOGIN",
@@ -17,9 +17,14 @@ export const loadLogin = () => ({
 export const loginAction = (info) => {
 	return (dispatch) => {
 		dispatch(loadLogin())
-		console.log(info)
 		
-		// axios.post(url, data: )
+		axios.post(url, info)
+			.then((res) => {
+				console.log(res)
+			})
+			.catch((err) => {
+				console.log(err)
+		})
 	}
 }
 

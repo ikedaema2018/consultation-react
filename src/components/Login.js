@@ -10,8 +10,6 @@ import {Link} from "react-router-dom";
 
 export default class Login extends Component {
 	render() {
-		console.log("this.prop_loadFlag")
-		console.log(this.props.loadFlag)
 		return (
 			<Grid container spacing={16} >
 				<Grid item xs={8} style={{paddingLeft: 50}}>
