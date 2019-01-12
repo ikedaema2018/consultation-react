@@ -9,7 +9,12 @@ import React, { Component } from 'react'
 import Modal from '@material-ui/core/Modal';
 import { Link } from 'react-router-dom'
 
+
 export default class RegisterForm extends Component {
+	
+	componentWillUnmount() {
+		this.props.resetState()
+	}
 
 	render(){
 		return(
@@ -65,7 +70,7 @@ export default class RegisterForm extends Component {
 								{this.props.registerModalStatus.isLoading ? "ロード中": null}
 								{this.props.registerModalStatus.isSuccess ? "ユーザー登録成功": this.props.registerModalStatus.errorMessage}
 							</h2>
-							{this.props.registerModalStatus.isSuccess ? <Link to={"/test"}>ログイン</Link> : ""}
+							<Link to={"/login"}>ログイン</Link>
 						</div>
 					</div>
 				</Modal>

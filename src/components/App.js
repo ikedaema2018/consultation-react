@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import RegisterForm from './RegisterForm.js'
+import RegisterInfos from '../containers/register_infos.js'
+import Login from '../containers/login.js'
 import AppHeader from './AppHeader.js'
 import RegisterTitle from './RegisterTitle.js'
 import { Switch, Route} from 'react-router-dom';
 
 class App extends Component {
-  constructor(props){
-    super(props)
-  }
 
   render() {
     return (
@@ -15,7 +13,8 @@ class App extends Component {
         <AppHeader />
         <RegisterTitle />
         <Switch>
-          <Route path="/" component={RegisterForm} />
+          <Route path={"/login"} component={Login}></Route>
+          <Route path="/" component={RegisterInfos}/>
         </Switch>
       </div>
     );

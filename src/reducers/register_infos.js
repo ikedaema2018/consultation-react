@@ -62,6 +62,11 @@ export const registerInfosReducer = (state = initialState, action) => {
 				}
 			}
 			
+		case 'RESET_STATE':
+			return {
+				...initialState
+			}
+			
 		default:
 			console.log(`${action.type}は許容されていないアクションです`)
 			return state

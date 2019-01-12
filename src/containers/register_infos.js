@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { inputRegisterInfo, sendRegisterInfo } from "../actions/resister_infos"
+import { inputRegisterInfo, sendRegisterInfo, resetState } from "../actions/resister_infos"
 import RegisterForm from '../components/register_infos'
 
 function mapStateToProps(state) {
@@ -21,6 +21,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		sendRegisterInfo(userInfo) {
 			dispatch(sendRegisterInfo(userInfo))
+		},
+		resetState() {
+			dispatch(resetState())
 		}
 	}
 }

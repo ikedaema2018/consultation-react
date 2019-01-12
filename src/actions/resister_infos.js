@@ -18,6 +18,11 @@ export const sendIsSuccess = (isSuccess, errorMessage = "ユーザー情報の�
 	errorMessage: errorMessage
 })
 
+export const resetState = () => ({
+	type: 'RESET_STATE',
+	payload: {}
+})
+
 
 //
 // export function sendRegisterInfo(userInfo) {
