@@ -14,16 +14,28 @@ export const loadLogin = () => ({
 	payload: {}
 })
 
+export const loginSuccess = () => ({
+	type: "LOGIN_SUCCESS",
+	payload: {}
+})
+
+export const loginError = () => ({
+	type: "LOGIN_ERROR",
+	payload: {}
+})
+
+
 export const loginAction = (info) => {
 	return (dispatch) => {
 		dispatch(loadLogin())
 		
 		axios.post(url, info)
 			.then((res) => {
-				console.log(res)
+				document.cookie = `auth_token=${res.data.auth_token}`
+				dispatch(loginSuccess())
 			})
 			.catch((err) => {
-				console.log(err)
+				dispatch(loginError())
 		})
 	}
 }

@@ -25,13 +25,14 @@ export default class Login extends Component {
 					</div>
 					
 					<Grid container justify={"flex-end"}>
-						<Button raised={true} color={"secondary"} onClick={() => this.props.loginAction(this.props.data)} >送信</Button>
+						<Button raised={'true'} color={"secondary"} onClick={() => this.props.loginAction(this.props.data)} >送信</Button>
 					</Grid>
 				</Grid>
 				
-				<Modal open={this.props.loadFlag}>
+				<Modal open={this.props.loadFlag} disableBackdropClick={true}>
 					<div className={"login-modal-style"}>
 						<div className={"login-modal-child"}>
+							{ this.props.loginFlag ? <h3>ログインしました</h3> : <h3>ログインに失敗しました</h3> }
 						</div>
 					</div>
 				</Modal>
@@ -41,8 +42,10 @@ export default class Login extends Component {
 }
 
 Login.propTypes = {
-	data: PropTypes.arrayOf.string,
-	message: PropTypes.arrayOf.string,
+	data: PropTypes.object,
+	message: PropTypes.object,
+	loadFlag: PropTypes.bool,
+	loginFlag: PropTypes.bool,
 	inputLoginForm: PropTypes.func,
-	
+	loginAction: PropTypes.func
 }

@@ -1,12 +1,14 @@
 import { connect } from 'react-redux'
-import { inputLoginForm, loadLogin, loginAction } from '../actions/login'
+import { inputLoginForm, loadLogin, loginAction, loginSuccess } from '../actions/login'
 import Login from '../components/Login'
 
 function mapStateToProps (state) {
+	
 	return {
 		data: state.rootReducer.loginReducer.data,
 		message: state.rootReducer.loginReducer.message,
-		loadFlag: state.rootReducer.loginReducer.loadLogin
+		loadFlag: state.rootReducer.loginReducer.loadFlag,
+		loginFlag: state.rootReducer.loginReducer.loginFlag
 	}
 }
 
@@ -20,8 +22,12 @@ function mapDispatchToProps (dispatch) {
 		},
 		loginAction(info) {
 			dispatch(loginAction(info))
+		},
+		loginSuccess() {
+			dispatch(loginSuccess())
 		}
 	}
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

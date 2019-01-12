@@ -7,7 +7,8 @@ const initialState = {
 		email: ["メールアドレスを入力してください"],
 		password: ["パスワードを入力してください"]
 	},
-	loadFlag: false
+	loadFlag: false,
+	loginFlag: false
 }
 
 export const loginReducer = (state = initialState, action) => {
@@ -27,7 +28,21 @@ export const loginReducer = (state = initialState, action) => {
 		case "LOAD_LOGIN":
 			return {
 				...state,
-				loadLogin: true
+				loadFlag: true
+			}
+			
+		case "LOGIN_SUCCESS":
+			return {
+				...state,
+				loadFlag: true,
+				loginFlag: true
+			}
+			
+		case "LOGIN_ERROR":
+			return {
+				...state,
+				loadFlag: true,
+				loginFlag: false
 			}
 			
 		default:
