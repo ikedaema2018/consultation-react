@@ -68,7 +68,6 @@ export const registerInfosReducer = (state = initialState, action) => {
 			}
 			
 		default:
-			console.log(`${action.type}は許容されていないアクションです`)
 			return state
 	}
 }
@@ -138,8 +137,8 @@ function checkValue(info, state){
 			break
 		
 		default:
-			console.log(`${info.name}は許容されていない名前です`)
-			break
+			// console.log(`${info.name}は許容されていない名前です`)
+			return state
 	}
 	
 	return state.message

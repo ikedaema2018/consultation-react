@@ -45,6 +45,13 @@ export const loginReducer = (state = initialState, action) => {
 				loginFlag: false
 			}
 			
+		case "MODAL_CLOSE":
+			console.log("wadawdawdawdwadawdawdawdadwadw")
+			return {
+				...state,
+				loadFlag: false
+			}
+			
 		default:
 			return state
 	}

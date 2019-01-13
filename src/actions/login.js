@@ -19,10 +19,22 @@ export const loginSuccess = () => ({
 	payload: {}
 })
 
-export const loginError = () => ({
-	type: "LOGIN_ERROR",
-	payload: {}
-})
+export const loginError = () => {
+	console.log("dawdwadaddwwadadwawdaw")
+	return {
+		type: "LOGIN_ERROR",
+		payload:{}
+	}
+}
+
+export const onModalOut = () => {
+	console.log("onModalOut")
+	return {
+		type: "MODAL_CLOSE",
+		payload: {}
+	}
+}
+
 
 
 export const loginAction = (info) => {

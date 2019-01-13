@@ -9,6 +9,7 @@ import '../css/login.css'
 import {Link} from "react-router-dom";
 
 export default class Login extends Component {
+	
 	render() {
 		return (
 			<Grid container spacing={16} >
@@ -29,7 +30,7 @@ export default class Login extends Component {
 					</Grid>
 				</Grid>
 				
-				<Modal open={this.props.loadFlag} disableBackdropClick={true}>
+				<Modal open={this.props.loadFlag} disableBackdropClick={false} onBackdropClick={() => this.props.onModalOut()}>
 					<div className={"login-modal-style"}>
 						<div className={"login-modal-child"}>
 							{ this.props.loginFlag ? <h3>ログインしました</h3> : <h3>ログインに失敗しました</h3> }
