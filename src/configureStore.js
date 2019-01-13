@@ -15,9 +15,9 @@ export default function createStore(history) {
 			routerReducer
 		}),
 		applyMiddleware(
+			thunk,
 			routerMiddleware(history),
 			logger,
-			thunk
 		)
 	)
 }

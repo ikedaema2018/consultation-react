@@ -7,8 +7,8 @@ import { ConnectedRouter } from 'react-router-redux'; // 追加
 import createBrowserHistory from 'history/createBrowserHistory'; // 追加
 
 
-const store = configureStore()
 const history = createBrowserHistory();
+const store = configureStore(history)
 
 ReactDOM.render(
 	<Provider store={store}>

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { toggleDrawer } from '../actions/app_header'
+import { toggleDrawer, pageTransition } from '../actions/app_header'
 import AppHeader from '../components/AppHeader'
 
 function mapStateToProps(state) {
@@ -12,6 +12,9 @@ function mapDispatchToProps(dispatch) {
 	return {
 		toggleDrawer(flagName, bool) {
 			dispatch(toggleDrawer(flagName, bool))
+		},
+		pageTransition(path){
+			dispatch(pageTransition(path))
 		}
 	}
 }
