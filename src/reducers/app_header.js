@@ -1,5 +1,6 @@
 const initialState = {
-	profileFlag: false
+	profileFlag: false,
+	logoutFlag: false
 }
 
 export const appHeaderReducer = (state = initialState, action) => {
@@ -8,6 +9,12 @@ export const appHeaderReducer = (state = initialState, action) => {
 			return {
 				...state,
 				[action.payload.flagName]: action.payload.bool
+			}
+		case "LOGOUT":
+			return {
+				...state,
+				logoutFlag: true,
+				profileFlag: false
 			}
 		default:
 			return state

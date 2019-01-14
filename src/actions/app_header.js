@@ -15,3 +15,13 @@ export const pageTransition = (path) => {
 		dispatch(push(path))
 	}
 }
+
+export const logoutAction = () => {
+	localStorage.removeItem('auth_token')
+	localStorage.removeItem('user_name')
+	
+	return {
+		type: "LOGOUT",
+		payload: {}
+	}
+}

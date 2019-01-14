@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
-import { toggleDrawer, pageTransition } from '../actions/app_header'
+import { toggleDrawer, pageTransition, logoutAction } from '../actions/app_header'
 import AppHeader from '../components/AppHeader'
 
 function mapStateToProps(state) {
 	return {
-		profileFlag: state.rootReducer.appHeaderReducer.profileFlag
+		profileFlag: state.rootReducer.appHeaderReducer.profileFlag,
+		logoutFlag: state.rootReducer.appHeaderReducer.logoutFlag
 	}
 }
 
@@ -15,6 +16,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		pageTransition(path){
 			dispatch(pageTransition(path))
+		},
+		logoutAction() {
+			dispatch(logoutAction())
 		}
 	}
 }
