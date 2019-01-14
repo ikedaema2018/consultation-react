@@ -26,13 +26,15 @@ export const loginError = () => {
 	}
 }
 
-export const onModalOut = () => {
-	console.log("onModalOut")
-	return {
-		type: "MODAL_CLOSE",
-		payload: {}
+export const toggleFlag = (flagName, bool) => ({
+	type: "TOGGLE_FLAG",
+	payload: {
+		flagName: flagName,
+		bool: bool
 	}
-}
+})
+
+
 
 
 

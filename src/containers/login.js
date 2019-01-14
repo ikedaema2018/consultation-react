@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { inputLoginForm, loadLogin, loginAction, loginSuccess, onModalOut } from '../actions/login'
+import { inputLoginForm, loadLogin, loginAction, loginSuccess, toggleFlag } from '../actions/login'
 import Login from '../components/Login'
 
 function mapStateToProps (state) {
@@ -26,8 +26,8 @@ function mapDispatchToProps (dispatch) {
 		loginSuccess() {
 			dispatch(loginSuccess())
 		},
-		onModalOut() {
-			dispatch(onModalOut())
+		toggleFlag(flagName, bool) {
+			dispatch(toggleFlag(flagName, bool))
 		}
 	}
 }
