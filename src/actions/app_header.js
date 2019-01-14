@@ -11,8 +11,7 @@ export const toggleDrawer = (flagName, bool) => {
 }
 
 export const pageTransition = (path) => {
-	console.log(23233443343443344434343)
-	return async (dispatch) => {
+	return (dispatch) => {
 		dispatch(push(path))
 	}
 }
