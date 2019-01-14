@@ -20,7 +20,6 @@ export const loginSuccess = () => ({
 })
 
 export const loginError = () => {
-	console.log("dawdwadaddwwadadwawdaw")
 	return {
 		type: "LOGIN_ERROR",
 		payload:{}
@@ -43,7 +42,8 @@ export const loginAction = (info) => {
 		
 		axios.post(url, info)
 			.then((res) => {
-				document.cookie = `auth_token=${res.data.auth_token}`
+				localStorage.setItem('user_name', res.data.name)
+				localStorage.setItem('auth_token', res.data.auth_token)
 				dispatch(loginSuccess())
 			})
 			.catch((err) => {

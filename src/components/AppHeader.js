@@ -51,10 +51,19 @@ class AppHeader extends Component {
 							
 							<List>
 								{
+									/*ログインしていたら名前表示*/
+									localStorage.getItem('auth_token') && localStorage.getItem('user_name')
+										? <ListItem button={false} key={"unique"}><ListItemText primary={localStorage.getItem('user_name') + "さん"}  style={{paddingLeft: 20, paddingRight: 20}} ></ListItemText></ListItem> : <ListItem button={false}></ListItem>
+								}
+								{
 									profileInfos.map((profileInfo) =>
-										((
-											<ListItem button={true} key={profileInfo.id.toString()} onClick={() => this.props.pageTransition(profileInfo.url)} ><ListItemText primary={profileInfo.name} style={{paddingLeft: 20, paddingRight: 20}} /></ListItem>
-										))
+										{
+											return (
+												<ListItem button={true} key={profileInfo.id.toString()} onClick={() => this.props.pageTransition(profileInfo.url)} >
+													<ListItemText primary={profileInfo.name} style={{paddingLeft: 20, paddingRight: 20}} />
+												</ListItem>
+											)
+										}
 									)
 								}
 							
