@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { inputRegisterInfo, sendRegisterInfo, resetState } from "../actions/resister_infos"
+import { inputRegisterInfo, sendRegisterInfo, resetState, registerToggleFlag } from "../actions/resister_infos"
 import RegisterForm from '../components/register_infos'
 
 function mapStateToProps(state) {
@@ -24,6 +24,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		resetState() {
 			dispatch(resetState())
+		},
+		registerToggleFlag(flagName, bool) {
+			dispatch(registerToggleFlag(flagName, bool))
 		}
 	}
 }

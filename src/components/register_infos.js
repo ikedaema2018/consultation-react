@@ -65,7 +65,7 @@ export default class RegisterForm extends Component {
 					</li>
 				</ul>
 				
-				<Modal open={this.props.registerModalFlag}>
+				<Modal open={this.props.registerModalFlag} onBackdropClick={() => this.props.registerToggleFlag('registerModalFlag', false)}>
 					<div className={"register-modal-style"}>
 						<div className={"register-modal-child"}>
 							<h2>
