@@ -7,6 +7,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FilledInput from '@material-ui/core/FilledInput';
+import axios from 'axios'
+axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 
 class RegisterInput extends Component {
@@ -29,7 +31,7 @@ class RegisterInput extends Component {
 	  let val = event.target.value
 
 	  var {data, message} = this.state
-
+	  
 	  switch (type) {
 		  case "name":
 		  	data.name = val
@@ -110,24 +112,62 @@ class RegisterInput extends Component {
 		  
 		  default:
 			  break
-		  
 	  }
 	  
 	  this.setState({data: data, message: message})
   }
 
 	sendData() {
-  	alert(`${this.state.data.name}さんのメールアドレスは${this.state.data.email}で性別は${this.state.data.gender}、年齢は${this.state.data.age}、自己紹介は${this.state.data.introduction}`)
-    this.setState({
-	    data: {name: '', email: '', password: '', password_confirmation: '', gender: '男', age: '', introduction: ''},
-	    message: {name: ["名前の入力は必須です"], email: ["メールアドレスの入力は必須です"],
-		    password: ["passwordの入力は必須です"], password_confirmation: ["１つ目と同じpasswordを入力してください"], age: ["年齢を選択してください"], introduction: []},
+		
+		let params = new URLSearchParams();
+		params = {
+			user: {}
+		}
+		
+		
+  	
+  	let user = {
+		  name: this.state.data.name,
+		  email: this.state.data.email,
+		  password: this.state.data.password,
+		  password_confirmation: this.state.data.password_confirmation,
+		  gender: this.state.data.gender,
+		  age: this.state.data.age,
+		  introduction: this.state.data.introduction
+	  }
+	  
+	  for (let key in user) {
+	  	params["user"][key] = user[key]
+	  }
+		
+  	
+		
+    axios.post('http://localhost:3000/users', params)
+	    .then((result) => {
+		    this.setState({
+			    data: {name: '', email: '', password: '', password_confirmation: '', gender: '男', age: '', introduction: ''},
+			    message: {name: ["名前の入力は必須です"], email: ["メールアドレスの入力は必須です"],
+				    password: ["passwordの入力は必須です"], password_confirmation: ["１つ目と同じpasswordを入力してください"], age: ["年齢を選択してください"], introduction: []},
+		    })
+	    })
+	    .catch((error) => {
+	    if (error.response) {
+	    	if (error.response.data.error) {
+	    		console.log(error.response.data.error)
+	    		if (error.response.data.error === "RecordNotUnique") {
+	    		  alert("ユーザー登録に失敗しました。すでに使用されているメールアドレスは使用できません")
+				    let message = this.state.message
+				    message.email.push("同じメールアドレスで登録することはできません")
+				    this.setState({data: this.state.data, message: message})
+			    }
+		    }
+	    }
+	    alert("不明なエラーが発生しました。電波の状態を確かめてください")
     })
 	}
 
 
 	render() {
-  	
 
   	let name = {data: this.state.data.name, message: this.state.message.name, checkValue: this.checkValue}
   	let email = {data: this.state.data.email, message: this.state.message.email, checkValue: this.checkValue}
@@ -158,7 +198,7 @@ class NameInput extends Component {
 			return (
 				<li>
 					<InputLabel>名前</InputLabel>
-					{this.props.message !== [] ? <p className={"error-message"}>{this.props.message[0]}</p> : <p></p>}
+					{this.props.message ? <p className={"error-message"}>{this.props.message[0]}</p> : <p></p>}
 					<TextField type={"text"} name={"name"} onChange={this.props.checkValue} value={this.props.data}></TextField>
 				</li>
 			)

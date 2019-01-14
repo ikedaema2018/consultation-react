@@ -1,0 +1,20 @@
+.error-message {
+    font-size: 8px;
+    color: red;
+    font-style: italic;
+}
+
+.login-modal-style {
+    top: 53%;
+    left: 49%;
+    transform: translate(-53%, -49%);
+    position: absolute;
+    background-color: #FFFBFB;
+    width: 50em;
+    height: 30em;
+    border-radius: 3em 3em 3em 3em;
+}
+
+.login-modal-child {
+    padding: 3em 3em 3em 3em;
+}
