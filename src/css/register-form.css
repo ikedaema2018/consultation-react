@@ -11,3 +11,18 @@
 .register-ul li {
 	margin-bottom: 1em;
 }
+
+.register-modal-style {
+	top: 53%;
+	left: 49%;
+	transform: translate(-53%, -49%);
+	position: absolute;
+	background-color: #FFFBFB;
+	width: 50em;
+	height: 30em;
+	border-radius: 3em 3em 3em 3em;
+}
+
+.register-modal-child {
+	padding: 3em 3em 3em 3em;
+}

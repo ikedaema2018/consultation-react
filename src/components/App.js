@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import RegisterInput from './RegisterForm.js'
-import AppHeader from './AppHeader.js'
-import RegisterTitle from './RegisterTitle.js'
+import RegisterInfos from '../containers/register_infos.js'
+import Login from '../containers/login.js'
+import AppHeader from '../containers/app_header.js'
+import { Switch, Route} from 'react-router-dom';
 
 class App extends Component {
-  constructor(props){
-    super(props)
-  }
 
   render() {
     return (
       <div className={"App"}>
         <AppHeader />
-        <RegisterTitle />
-        <RegisterInput />
+        <Switch>
+          <Route path={"/login"} component={Login}></Route>
+          <Route path="/" component={RegisterInfos}/>
+        </Switch>
       </div>
     );
   }

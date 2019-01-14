@@ -1,22 +1,29 @@
 import { connect } from 'react-redux'
-import { inputRegisterInfo, sendRegisterInfo } from "../actions/resister_infos"
+import { inputRegisterInfo, sendRegisterInfo, resetState } from "../actions/resister_infos"
 import RegisterForm from '../components/register_infos'
 
-function mapStateToProps({ data, message, sendFlag }) {
+function mapStateToProps(state) {
 	return {
-		data,
-		message,
-		sendFlag
+		data: state.rootReducer.registerInfosReducer.data,
+		message: state.rootReducer.registerInfosReducer.message,
+		sendFlag: state.rootReducer.registerInfosReducer.sendFlag,
+		registerModalFlag: state.rootReducer.registerInfosReducer.registerModalFlag,
+		registerModalStatus: state.rootReducer.registerInfosReducer.registerModalStatus
 	}
 }
+
+
 
 function mapDispatchToProps(dispatch) {
 	return {
 		inputRegisterInfo(info) {
 			dispatch(inputRegisterInfo(info))
 		},
-		sendRegisterInfo() {
-			dispatch(sendRegisterInfo())
+		sendRegisterInfo(userInfo) {
+			dispatch(sendRegisterInfo(userInfo))
+		},
+		resetState() {
+			dispatch(resetState())
 		}
 	}
 }

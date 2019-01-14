@@ -1,17 +1,20 @@
 import React from 'react';
-import { createStore } from 'redux'
 import ReactDOM from 'react-dom';
-// import App from './components/App';
-import registerInfosReducer from './reducers/register_infos'
+import App from './components/App';
 import { Provider } from 'react-redux'
-import RegisterForm from './containers/register_infos'
+import configureStore from './configureStore'
+import { ConnectedRouter } from 'react-router-redux'; // 追加
+import createBrowserHistory from 'history/createBrowserHistory'; // 追加
 
 
-const store = createStore(registerInfosReducer)
+const history = createBrowserHistory();
+const store = configureStore(history)
 
 ReactDOM.render(
 	<Provider store={store}>
-		< RegisterForm />
+		<ConnectedRouter history={history}>
+			<App />
+		</ConnectedRouter>
 	</Provider>
 	,
 	document.getElementById('root')
