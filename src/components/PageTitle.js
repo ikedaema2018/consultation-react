@@ -3,7 +3,7 @@ import Divider from '@material-ui/core/Divider';
 import PropTypes from 'prop-types'
 import '../css/register-title.css'
 
-class RegisterTitle extends Component {
+class PageTitle extends Component {
 	render() {
 		return (
 			<div className={"register-title-block"}>
@@ -14,8 +14,8 @@ class RegisterTitle extends Component {
 	}
 }
 
-RegisterTitle.propTypes = {
+PageTitle.propTypes = {
 	title: PropTypes.string.isRequired
 }
 
-export default RegisterTitle;
+export default PageTitle;

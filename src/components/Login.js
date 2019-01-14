@@ -7,14 +7,14 @@ import Modal from '@material-ui/core/Modal'
 import PropTypes from 'prop-types';
 import '../css/login.css'
 import {Link} from "react-router-dom";
-import RegisterTitle from './RegisterTitle.js'
+import PageTitle from './PageTitle.js'
 
 export default class Login extends Component {
 	
 	render() {
 		return (
 			<div>
-				<RegisterTitle title={"Sign in"}></RegisterTitle>
+				<PageTitle title={"Log in"}></PageTitle>
 				<Grid container spacing={16} >
 					<Grid item xs={8} style={{paddingLeft: 50}}>
 						<div style={{marginBottom: 20}}>

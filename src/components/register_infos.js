@@ -7,7 +7,7 @@ import Radio from '@material-ui/core/Radio';
 import FilledInput from '@material-ui/core/FilledInput';
 import React, { Component } from 'react'
 import Modal from '@material-ui/core/Modal';
-import RegisterTitle from './RegisterTitle'
+import PageTitle from './PageTitle'
 import { Link } from 'react-router-dom'
 
 
@@ -20,7 +20,7 @@ export default class RegisterForm extends Component {
 	render(){
 		return(
 			<div>
-				<RegisterTitle title={"Sign in"} />
+				<PageTitle title={"Sign up"} />
 				<ul className={"register-ul"}>
 					<li>
 						<InputLabel>名前</InputLabel>
