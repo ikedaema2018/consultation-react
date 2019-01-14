@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from "@material-ui/core/Toolbar"
@@ -32,8 +33,6 @@ const profileInfos = [
 class AppHeader extends Component {
 	
 	render() {
-		console.log("this.props")
-		console.log(this.props)
 		return(
 			<AppBar position={"static"} color={"secondary"}>
 				<Toolbar>
@@ -66,6 +65,12 @@ class AppHeader extends Component {
 			</AppBar>
 		)
 	}
+}
+
+AppHeader.propTypes = {
+	toggleDrawer: PropTypes.func.isRequired,
+	pageTransition: PropTypes.func.isRequired,
+	profileFlag: PropTypes.bool.isRequired
 }
 
 export default AppHeader;
