@@ -12,9 +12,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from "@material-ui/core/es/ListItemText/ListItemText";
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
-
 import { Link } from 'react-router-dom'
-import {WithStyles} from "@material-ui/core";
 
 const profileInfos = [
 	{
