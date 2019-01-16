@@ -13,6 +13,9 @@ import ListItemText from "@material-ui/core/es/ListItemText/ListItemText";
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
+import { Link } from 'react-router-dom'
+import {WithStyles} from "@material-ui/core";
+
 const profileInfos = [
 	{
 		id: 1,
@@ -22,9 +25,10 @@ const profileInfos = [
 	{
 		id: 2,
 		name: "新規登録",
-		url: "/"
+		url: "/register"
 	}
 ]
+
 
 
 class AppHeader extends Component {
@@ -34,7 +38,7 @@ class AppHeader extends Component {
 			<div>
 				<AppBar position={"static"} color={"secondary"}>
 					<Toolbar>
-						<Typography variant={"title"} align={"center"} color={"inherit"}>Heart Up</Typography>
+						<Typography variant={"title"} align={"center"} color={"inherit"} ><Link to={{pathname: '/'}} style={{textDecoration: "none", color: "inherit"}} classes={"underlineNone"} >Heart up</Link></Typography>
 						
 						<div style={{flexGrow: 1}}></div>
 						<IconButton　onClick={() => this.props.toggleDrawer('profileFlag', true)}>

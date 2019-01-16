@@ -12,7 +12,7 @@ class App extends Component {
         <AppHeader />
         <Switch>
           <Route path={"/login"} component={Login}></Route>
-          <Route path="/" component={RegisterInfos}/>
+          <Route path={"/register"} component={RegisterInfos}/>
         </Switch>
       </div>
     );
