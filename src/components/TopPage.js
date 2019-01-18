@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogActions from '@material-ui/core/DialogActions'
 import TextField from '@material-ui/core/TextField'
+import Snackbar from '@material-ui/core/Snackbar'
 import { withStyles } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import '../css/top_page.css'
@@ -63,6 +64,16 @@ class TopPage extends Component {
 							<Button variant={"contained"} color={"secondary"} onClick={() => this.props.pageTransition('login')}>ログイン</Button>
 						</DialogActions>
 					</Dialog>
+					<Snackbar
+					anchorOrigin={{
+						horizontal: "center",
+						vertical: "top"
+					}}
+					open={this.props.formData.sendWorrySuccess}
+					autoHideDuration={2000}
+					onClose={() => this.props.changeFlag("sendWorrySuccess", false)}
+					message={<span id="message-id">悩みの送信に成功したよ！</span>}>
+				</Snackbar>
 				</div>
 			</div>
 		)

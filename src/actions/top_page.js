@@ -37,6 +37,16 @@ export const pageTransition = (path) => {
 	}
 }
 
+export const sendWorrySuccess = () => ({
+	type: "SEND_WORRY_SUCCESS_START",
+	payload: {}
+})
+
+export const finishWorrySending = () => ({
+	type: "FINISH_WORRY_SENDING",
+	payload: {}
+})
+
 
 
 export const inputWorryValueSubmit = (value) => {
@@ -52,7 +62,16 @@ export const inputWorryValueSubmit = (value) => {
 	return (dispatch) => {
 		dispatch(changeFlag("waitOfSubmit", true))
 		axios.post("http://localhost:3000/worry", data).then((res) => {
-			console.log(res)
+			//悩みの投稿に成功しました
+			dispatch(sendWorrySuccess())
+				const sleep = msec => new Promise(resolve => setTimeout(resolve, msec))
+				async function oneSecWait() {
+				await sleep(1000);
+				dispatch(finishWorrySending())
+				}
+				oneSecWait()
+				
+				
 		}).catch((err) => {
 			console.log(err)
 		})
