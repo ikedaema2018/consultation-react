@@ -34,7 +34,7 @@ class TopPage extends Component {
 				<div>
 					<Button
 						variant={"contained"} color={"secondary"} className={this.props.classes.fixed}
-						onClick={() => this.props.changeFlag("heartUpViewFlag", true)}>heart up
+						onClick={() => this.props.disPlayPostView()}>heart up
 					</Button>
 				</div>
 				
@@ -51,6 +51,17 @@ class TopPage extends Component {
 								<Button variant={"contained"} color={"secondary"} onClick={() => this.props.inputWorryValueSubmit(this.props.formData.inputWorryTitleValue)} >相談する</Button>
 							</DialogActions>
 						</DialogContent>
+					</Dialog>
+					
+					<Dialog open={this.props.formData.pleaseLoginFlag} onClose={() => this.props.changeFlag("pleaseLoginFlag", false)}>
+						<DialogTitle>
+							悩みを投稿する前にログインしてね！
+						</DialogTitle>
+						<DialogActions>
+							<Button variant={"contained"} color={"default"} onClick={() => this.props.changeFlag("pleaseLoginFlag", false)}>閉じる</Button>
+							<div style={{flexGrow: 1}}></div>
+							<Button variant={"contained"} color={"secondary"} onClick={() => this.props.pageTransition('login')}>ログイン</Button>
+						</DialogActions>
 					</Dialog>
 				</div>
 			</div>

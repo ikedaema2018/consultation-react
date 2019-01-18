@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import TopPage from '../components/TopPage.js'
-import { changeFlag, changeInputWorryTitleValue, inputWorryValueSubmit } from "../actions/top_page";
+import { changeFlag, changeInputWorryTitleValue, inputWorryValueSubmit, disPlayPostView, pageTransition } from "../actions/top_page";
 
 function mapStateToProps(state) {
   return {
@@ -18,6 +18,12 @@ function mapDispatchToProps(dispatch) {
 	  },
 	  inputWorryValueSubmit(value) {
   		dispatch(inputWorryValueSubmit(value))
+	  },
+	  disPlayPostView(){
+  		dispatch(disPlayPostView())
+	  },
+	  pageTransition(path){
+  		dispatch(pageTransition(path))
 	  }
   }
 }
