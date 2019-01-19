@@ -6,7 +6,8 @@ const initialState = {
 		inputWorryTitleValue: "",
 		waitOfSubmit: false,
 		pleaseLoginFlag: false,
-		sendWorrySuccess: false
+		sendWorrySuccess: false,
+		sendWorryFailure: false
 	}
 }
 
@@ -45,6 +46,14 @@ export const topPageReducer = (state = initialState, action) => {
 					...state.formData,
 					heartUpViewFlag: false,
 					inputWorryTitleValue: ""
+				}
+			}
+		case "SEND_WORRY_FAILURE":
+			return {
+				...state,
+				formData: {
+					...state.formData,
+					sendWorryFailure: true
 				}
 			}
 		

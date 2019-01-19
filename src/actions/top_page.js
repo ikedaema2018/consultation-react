@@ -47,6 +47,11 @@ export const finishWorrySending = () => ({
 	payload: {}
 })
 
+export const sendWorryFailure = () => ({
+	type: "SEND_WORRY_FAILURE",
+	payload: {}
+})
+
 
 
 export const inputWorryValueSubmit = (value) => {
@@ -61,7 +66,8 @@ export const inputWorryValueSubmit = (value) => {
 	
 	return (dispatch) => {
 		dispatch(changeFlag("waitOfSubmit", true))
-		axios.post("http://localhost:3000/worry", data).then((res) => {
+		axios.post("http://localhost:3000/worry", data)
+			.then((res) => {
 			//悩みの投稿に成功しました
 			dispatch(sendWorrySuccess())
 				const sleep = msec => new Promise(resolve => setTimeout(resolve, msec))
@@ -70,10 +76,9 @@ export const inputWorryValueSubmit = (value) => {
 				dispatch(finishWorrySending())
 				}
 				oneSecWait()
-				
-				
-		}).catch((err) => {
-			console.log(err)
+		})
+			.catch((err) => {
+			dispatch(sendWorryFailure())
 		})
 	}
 }

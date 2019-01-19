@@ -8,15 +8,22 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogActions from '@material-ui/core/DialogActions'
 import TextField from '@material-ui/core/TextField'
 import Snackbar from '@material-ui/core/Snackbar'
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { withStyles } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import '../css/top_page.css'
+// import { makeStyles } from '@material-ui/styles';
+import green from '@material-ui/core/colors/green'
+
 
 const styles = () => ({
 	fixed: {
 		position: "fixed",
 		bottom: 50,
 		right: 50
+	},
+	success: {
+		backgroundColor: "#008000"
 	}
 })
 
@@ -65,15 +72,32 @@ class TopPage extends Component {
 						</DialogActions>
 					</Dialog>
 					<Snackbar
-					anchorOrigin={{
-						horizontal: "center",
-						vertical: "top"
-					}}
-					open={this.props.formData.sendWorrySuccess}
-					autoHideDuration={2000}
-					onClose={() => this.props.changeFlag("sendWorrySuccess", false)}
-					message={<span id="message-id">悩みの送信に成功したよ！</span>}>
-				</Snackbar>
+						anchorOrigin={{
+							horizontal: "center",
+							vertical: "top"
+						}}
+						open={this.props.formData.sendWorrySuccess}
+						autoHideDuration={1000}
+						onClose={() => this.props.changeFlag("sendWorrySuccess", false)}
+						
+					>
+						
+						<SnackbarContent
+							onClose={() => this.props.changeFlag("sendWorrySuccess", false)}
+							style={{backgroundColor: green[500]}}
+							message={<span>悩みの送信に成功しました</span>}
+						/>
+				  </Snackbar>
+					<Snackbar
+					  anchorOrigin={{
+					  	horizontal: "center",
+						  vertical: "top"
+					  }}
+					  open={this.props.formData.sendWorryFailure}
+					  autoHideDuration={2000}
+					  onClose={() => this.props.changeFlag("sendWorryFailure", false)}
+					  message={<span id={"message_id"}>悩みの送信に失敗しました。電波が悪いか、サーバーの調子がおかしい可能性があります</span>}>
+					</Snackbar>
 				</div>
 			</div>
 		)
