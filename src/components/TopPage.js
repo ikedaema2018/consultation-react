@@ -12,11 +12,12 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { withStyles } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import '../css/top_page.css'
-// import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 import green from '@material-ui/core/colors/green'
+import red from '@material-ui/core/colors/red';
 
 
-const styles = () => ({
+const styles = ({
 	fixed: {
 		position: "fixed",
 		bottom: 50,
@@ -24,12 +25,16 @@ const styles = () => ({
 	},
 	success: {
 		backgroundColor: "#008000"
+	},
+	error: {
+		backgroundColor: red[500]
 	}
 })
 
 
 
 class TopPage extends Component {
+	
 	
 	constructor(props) {
 		super(props)
@@ -95,8 +100,13 @@ class TopPage extends Component {
 					  }}
 					  open={this.props.formData.sendWorryFailure}
 					  autoHideDuration={2000}
-					  onClose={() => this.props.changeFlag("sendWorryFailure", false)}
-					  message={<span id={"message_id"}>悩みの送信に失敗しました。電波が悪いか、サーバーの調子がおかしい可能性があります</span>}>
+					  >
+						<SnackbarContent
+							onClose={() => this.props.changeFlag("sendWorryFailure", false)}
+							message={<span id={"message_id"}>悩みの送信に失敗しました。電波が悪いか、サーバーの調子がおかしい可能性があります</span>}
+							// style={{backgroundColor: red[500]}}
+							className={this.props.classes.error}
+						/>
 					</Snackbar>
 				</div>
 			</div>
