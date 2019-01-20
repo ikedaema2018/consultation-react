@@ -9,12 +9,18 @@ import DialogActions from '@material-ui/core/DialogActions'
 import TextField from '@material-ui/core/TextField'
 import Snackbar from '@material-ui/core/Snackbar'
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+import Grid from "@material-ui/core/Grid"
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import '../css/top_page.css'
 import { makeStyles } from '@material-ui/styles';
 import green from '@material-ui/core/colors/green'
 import red from '@material-ui/core/colors/red';
+import pink from '@material-ui/core/colors/pink';
+
 
 
 const styles = ({
@@ -28,6 +34,9 @@ const styles = ({
 	},
 	error: {
 		backgroundColor: red[500]
+	},
+	card: {
+		margin: "2em 2em 2em 2em"
 	}
 })
 
@@ -35,6 +44,9 @@ const styles = ({
 
 class TopPage extends Component {
 	
+	componentWillMount(): void {
+	  this.props.receiveWorryData()
+	}
 	
 	constructor(props) {
 		super(props)
@@ -43,7 +55,20 @@ class TopPage extends Component {
 	render() {
 		return (
 			<div>
-				<PageTitle title={"みんなの悩みを投稿してね！"}/>
+				<PageTitle title={"みんなの悩みを投稿してね！"} />
+				{this.props.worryData.worryLoadFlag ? <h1>データの取得中です。</h1> : ""}
+				
+				<Grid container={true} spacing={12} style={{backgroundColor: pink[50]}}>
+					{this.props.worryData.worryDataArray.map(data => (
+						<Grid xs={4} style={{height: "6em"}}>
+							<Card className={this.props.classes.card}>
+								<CardContent>
+									<Typography>{data.worry}</Typography>
+								</CardContent>
+							</Card>
+						</Grid>
+					))}
+				</Grid>
 				<div>
 					<Button
 						variant={"contained"} color={"secondary"} className={this.props.classes.fixed}
@@ -88,7 +113,6 @@ class TopPage extends Component {
 					>
 						
 						<SnackbarContent
-							onClose={() => this.props.changeFlag("sendWorrySuccess", false)}
 							style={{backgroundColor: green[500]}}
 							message={<span>悩みの送信に成功しました</span>}
 						/>
@@ -99,12 +123,11 @@ class TopPage extends Component {
 						  vertical: "top"
 					  }}
 					  open={this.props.formData.sendWorryFailure}
-					  autoHideDuration={2000}
+					  autoHideDuration={1000}
+					  onClose={() => this.props.changeFlag("sendWorryFailure", false)}
 					  >
 						<SnackbarContent
-							onClose={() => this.props.changeFlag("sendWorryFailure", false)}
 							message={<span id={"message_id"}>悩みの送信に失敗しました。電波が悪いか、サーバーの調子がおかしい可能性があります</span>}
-							// style={{backgroundColor: red[500]}}
 							className={this.props.classes.error}
 						/>
 					</Snackbar>

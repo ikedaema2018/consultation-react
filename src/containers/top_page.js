@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
 import TopPage from '../components/TopPage.js'
-import { changeFlag, changeInputWorryTitleValue, inputWorryValueSubmit, disPlayPostView, pageTransition } from "../actions/top_page";
+import { changeFlag, changeInputWorryTitleValue, inputWorryValueSubmit, disPlayPostView, pageTransition, receiveWorryData, changeWorryFlag } from "../actions/top_page";
 
 function mapStateToProps(state) {
   return {
-  	formData: state.rootReducer.topPageReducer.formData
+  	formData: state.rootReducer.topPageReducer.formData,
+	  worryData: state.rootReducer.topPageReducer.worryData
   }
 }
 
@@ -24,6 +25,12 @@ function mapDispatchToProps(dispatch) {
 	  },
 	  pageTransition(path){
   		dispatch(pageTransition(path))
+	  },
+	  receiveWorryData() {
+		  dispatch(receiveWorryData())
+	  },
+	  changeWorryFlag(flagName, bool) {
+  		dispatch(changeWorryFlag(flagName, bool))
 	  }
   }
 }

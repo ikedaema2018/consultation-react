@@ -52,6 +52,36 @@ export const sendWorryFailure = () => ({
 	payload: {}
 })
 
+export const updateWorryData = (data, err) => ({
+	type: "UPDATE_WORRY_DATA",
+	payload: {
+		data: data,
+		error: err
+	}
+})
+
+export const changeWorryFlag = (flagName, bool) => ({
+	type: "CHANGE_WORRY_FLAG",
+	payload: {
+		flagName: flagName,
+		bool: bool
+	}
+})
+
+
+export const receiveWorryData = () => {
+	return (dispatch) => {
+		dispatch(changeWorryFlag("worryLoadFlag", true))
+		axios.get("http://localhost:3000/worry")
+			.then(res => {
+				dispatch(updateWorryData(res.data), null)
+			})
+			.catch(err => {
+				console.log(err)
+			})
+	}
+}
+
 
 
 export const inputWorryValueSubmit = (value) => {
@@ -65,7 +95,7 @@ export const inputWorryValueSubmit = (value) => {
 	let data = {worry : {worry: value}, auth_token: localStorage.getItem("auth_token")}
 	
 	return (dispatch) => {
-		dispatch(changeFlag("waitOfSubmit", true))
+		dispatch(changeWorryFlag("waitOfSubmit", true))
 		axios.post("http://localhost:3000/worry", data)
 			.then((res) => {
 			//悩みの投稿に成功しました

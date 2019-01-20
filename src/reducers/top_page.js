@@ -8,6 +8,10 @@ const initialState = {
 		pleaseLoginFlag: false,
 		sendWorrySuccess: false,
 		sendWorryFailure: false
+	},
+	worryData: {
+		worryDataArray: [],
+		worryLoadFlag: false
 	}
 }
 
@@ -54,6 +58,25 @@ export const topPageReducer = (state = initialState, action) => {
 				formData: {
 					...state.formData,
 					sendWorryFailure: true
+				}
+			}
+			
+		case "UPDATE_WORRY_DATA":
+			return {
+				...state,
+				worryData: {
+					...state.worryData,
+					worryDataArray: action.payload.data,
+					worryLoadFlag: false
+				}
+			}
+			
+		case "CHANGE_WORRY_FLAG":
+			return {
+				...state,
+				worryData: {
+					...state.worryData,
+					[action.payload.flagName]:  action.payload.bool
 				}
 			}
 		

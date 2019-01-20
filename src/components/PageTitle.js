@@ -2,6 +2,14 @@ import React, { Component } from 'react'
 import Divider from '@material-ui/core/Divider';
 import PropTypes from 'prop-types'
 import '../css/register-title.css'
+import { withStyles } from '@material-ui/core'
+
+const styles = ({
+	pageTitle: {
+		marginBottom: "0.3em"
+	}
+})
+
 
 class PageTitle extends Component {
 	render() {
@@ -18,4 +26,4 @@ PageTitle.propTypes = {
 	title: PropTypes.string.isRequired
 }
 
-export default PageTitle;
+export default withStyles(styles)(PageTitle);
