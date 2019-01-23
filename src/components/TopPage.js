@@ -12,11 +12,11 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Grid from "@material-ui/core/Grid"
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
+import CardActions from '@material-ui/core/CardActions'
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import '../css/top_page.css'
-import { makeStyles } from '@material-ui/styles';
 import green from '@material-ui/core/colors/green'
 import red from '@material-ui/core/colors/red';
 import pink from '@material-ui/core/colors/pink';
@@ -36,7 +36,19 @@ const styles = ({
 		backgroundColor: red[500]
 	},
 	card: {
-		margin: "2em 2em 2em 2em"
+		// margin: "2em 2em 2em 2em",
+		height: "9em"
+	},
+	typography: {
+		overflow: "hidden"
+	},
+	cardContent: {
+		height: "4em",
+		overflow: "hidden"
+	},
+	cardButton: {
+		color: "#fff",
+		backgroundColor: pink[200]
 	}
 })
 
@@ -48,8 +60,30 @@ class TopPage extends Component {
 	  this.props.receiveWorryData()
 	}
 	
+	// UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
+	// 	console.log(nextProps)
+	// }
+	
 	constructor(props) {
 		super(props)
+	}
+	
+	timeToInterval(time): string {
+		let send_time = Date.parse(time)
+		let now = Date.now()
+		let msec_dif = now - send_time
+		
+		if (msec_dif <= 3600000) {
+			let min = msec_dif / 60000
+			console.log(Math.round(min))
+			return `${Math.round(min)}分前`
+		} else if (msec_dif <= 86400000) {
+		　　let hour = msec_dif / 3600000
+			console.log(Math.round(hour))
+			return `${Math.round(hour)}時間前`
+		} else {
+			let days = msec_dif / 86400000
+			return `${Math.round(days)}日前`}
 	}
 	
 	render() {
@@ -58,17 +92,36 @@ class TopPage extends Component {
 				<PageTitle title={"みんなの悩みを投稿してね！"} />
 				{this.props.worryData.worryLoadFlag ? <h1>データの取得中です。</h1> : ""}
 				
-				<Grid container={true} spacing={12} style={{backgroundColor: pink[50]}}>
-					{this.props.worryData.worryDataArray.map(data => (
-						<Grid xs={4} style={{height: "6em"}}>
-							<Card className={this.props.classes.card}>
-								<CardContent>
-									<Typography>{data.worry}</Typography>
-								</CardContent>
-							</Card>
-						</Grid>
-					))}
-				</Grid>
+				<div>
+					<Grid container={true} spacing={32} style={{backgroundColor: pink[50], height: "100vh"}}>
+						{this.props.worryData.worryDataArray.map(data => (
+							<Grid key={data.id} item={true} xs={3}>
+								<Card className={this.props.classes.card}>
+									<CardContent className={this.props.classes.cardContent}>
+										<Typography className={this.props.classes.typography}>
+											{
+												data.worry.length >= 100 ? data.worry.substr(0, 80) + "..." : data.worry
+											}
+										</Typography>
+									</CardContent>
+									<div　style={{display: "flex"}}>
+										<CardContent>
+											<Typography variant={"body1"} style={{fontSize: "10px"}}>{data.name}の投稿です</Typography>
+											<Typography variant={"body2"} style={{fontSize: "8px"}}>{this.timeToInterval(data.created_at)}</Typography>
+										</CardContent>
+										
+										<div style={{flexGrow: "1"}}></div>
+										
+										<CardActions>
+											<Button size={"small"} className={this.props.classes.cardButton}>みる</Button>
+										</CardActions>
+									</div>
+								</Card>
+							</Grid>
+						))}
+					</Grid>
+				</div>
+				
 				<div>
 					<Button
 						variant={"contained"} color={"secondary"} className={this.props.classes.fixed}

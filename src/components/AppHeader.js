@@ -34,7 +34,7 @@ class AppHeader extends Component {
 	render() {
 		return(
 			<div>
-				<AppBar position={"static"} color={"secondary"}>
+				<AppBar position={"fixed"} color={"secondary"}>
 					<Toolbar>
 						<Typography variant={"title"} align={"center"} color={"inherit"} ><Link to={{pathname: '/'}} style={{textDecoration: "none", color: "inherit"}} classes={"underlineNone"} >Heart up</Link></Typography>
 						
@@ -76,6 +76,7 @@ class AppHeader extends Component {
 						</Drawer>
 					</Toolbar>
 				</AppBar>
+				<div style={{height: "3em"}}></div>
 				
 				<Dialog aria-labelledby={"alert-dialog-title"} open={this.props.logoutFlag} onClose={() => this.props.toggleDrawer('logoutFlag', false)}>
 				  <DialogTitle id="alert-dialog-title">{ "ログアウトしましたよ！" }</DialogTitle>
