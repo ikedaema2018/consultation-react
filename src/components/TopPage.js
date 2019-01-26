@@ -37,7 +37,7 @@ const styles = ({
 	},
 	card: {
 		// margin: "2em 2em 2em 2em",
-		height: "9em"
+		// height: "9em"
 	},
 	typography: {
 		overflow: "hidden"
@@ -92,8 +92,8 @@ class TopPage extends Component {
 				<PageTitle title={"みんなの悩みを投稿してね！"} />
 				{this.props.worryData.worryLoadFlag ? <h1>データの取得中です。</h1> : ""}
 				
-				<div>
-					<Grid container={true} spacing={32} style={{backgroundColor: pink[50], height: "100vh"}}>
+				<div style={{paddingLeft: "1em", paddingRight: "1em", backgroundColor: pink[50], height: "100vh"}}>
+					<Grid container={true} spacing={32}>
 						{this.props.worryData.worryDataArray.map(data => (
 							<Grid key={data.id} item={true} xs={3}>
 								<Card className={this.props.classes.card}>
@@ -113,7 +113,7 @@ class TopPage extends Component {
 										<div style={{flexGrow: "1"}}></div>
 										
 										<CardActions>
-											<Button size={"small"} className={this.props.classes.cardButton}>みる</Button>
+											<Button size={"small"} className={this.props.classes.cardButton} onClick={() => this.props.pageTransition("/worry/" + data.id)}>みる</Button>
 										</CardActions>
 									</div>
 								</Card>

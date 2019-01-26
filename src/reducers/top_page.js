@@ -1,4 +1,3 @@
-import {sendWorrySuccess} from "../actions/top_page";
 
 const initialState = {
 	formData: {
