@@ -15,16 +15,26 @@ export const successCommentFetch = (value) => ({
 	}
 })
 
+export const changeCommentValue = (value) => ({
+	type: "CHANGE_COMMENT_VALUE",
+	payload: {
+		value: value
+	}
+})
+
 
 export const fetchComment = (id) => {
 	return (dispatch) => {
 		dispatch(changeFlagList("loadCommentFlag", true))
 		
 		axios.get("http://localhost:3000/worry/" + id).then((response) => {
-			console.log(response)
 			dispatch(successCommentFetch(response.data))
 		}).catch((err) => {
-			console.log(err)
+			dispatch(changeFlagList("connectServerFailureFlag", true))
 		})
 	}
+}
+
+export const submitComment = (value) => {
+
 }

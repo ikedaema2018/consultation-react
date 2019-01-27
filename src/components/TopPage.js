@@ -21,6 +21,10 @@ import green from '@material-ui/core/colors/green'
 import red from '@material-ui/core/colors/red';
 import pink from '@material-ui/core/colors/pink';
 
+import { AlertSnackBar } from './Molecules/AlertSnackBar/index.js'
+
+import { timeToInterval } from "../Utility/common";
+
 
 
 const styles = ({
@@ -68,27 +72,11 @@ class TopPage extends Component {
 		super(props)
 	}
 	
-	timeToInterval(time): string {
-		let send_time = Date.parse(time)
-		let now = Date.now()
-		let msec_dif = now - send_time
-		
-		if (msec_dif <= 3600000) {
-			let min = msec_dif / 60000
-			console.log(Math.round(min))
-			return `${Math.round(min)}分前`
-		} else if (msec_dif <= 86400000) {
-		　　let hour = msec_dif / 3600000
-			console.log(Math.round(hour))
-			return `${Math.round(hour)}時間前`
-		} else {
-			let days = msec_dif / 86400000
-			return `${Math.round(days)}日前`}
-	}
 	
 	render() {
 		return (
 			<div>
+				
 				<PageTitle title={"みんなの悩みを投稿してね！"} />
 				{this.props.worryData.worryLoadFlag ? <h1>データの取得中です。</h1> : ""}
 				
@@ -107,7 +95,7 @@ class TopPage extends Component {
 									<div　style={{display: "flex"}}>
 										<CardContent>
 											<Typography variant={"body1"} style={{fontSize: "10px"}}>{data.name}の投稿です</Typography>
-											<Typography variant={"body2"} style={{fontSize: "8px"}}>{this.timeToInterval(data.created_at)}</Typography>
+											<Typography variant={"body2"} style={{fontSize: "8px"}}>{timeToInterval(data.created_at)}</Typography>
 										</CardContent>
 										
 										<div style={{flexGrow: "1"}}></div>
@@ -154,22 +142,15 @@ class TopPage extends Component {
 							<Button variant={"contained"} color={"secondary"} onClick={() => this.props.pageTransition('login')}>ログイン</Button>
 						</DialogActions>
 					</Dialog>
-					<Snackbar
-						anchorOrigin={{
-							horizontal: "center",
-							vertical: "top"
-						}}
-						open={this.props.formData.sendWorrySuccess}
-						autoHideDuration={1000}
-						onClose={() => this.props.changeFlag("sendWorrySuccess", false)}
-						
+					
+					<AlertSnackBar open={this.props.formData.sendWorrySuccess}
+					  onClose={() => this.props.changeFlag("sendWorrySuccess", false)}
+					  backColor={green[500]}
 					>
-						
-						<SnackbarContent
-							style={{backgroundColor: green[500]}}
-							message={<span>悩みの送信に成功しました</span>}
-						/>
-				  </Snackbar>
+					  投稿に成功しました
+					</AlertSnackBar>
+					
+					
 					<Snackbar
 					  anchorOrigin={{
 					  	horizontal: "center",
