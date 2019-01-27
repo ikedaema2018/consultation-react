@@ -22,6 +22,7 @@ import red from '@material-ui/core/colors/red';
 import pink from '@material-ui/core/colors/pink';
 
 import { AlertSnackBar } from './Molecules/AlertSnackBar/index.js'
+import { DialogWithTextField } from "./Molecules/DialogWithTextField";
 
 import { timeToInterval } from "../Utility/common";
 
@@ -113,18 +114,14 @@ class TopPage extends Component {
 				
 				
 				<div>
-					<Dialog open={this.props.formData.heartUpViewFlag} onClose={() => this.props.changeFlag("heartUpViewFlag", false)}>
-						<DialogTitle>なんでも相談しちゃおう</DialogTitle>
-						<DialogContent>
-							<DialogContentText>悩みを書いて「相談する」ボタンを押してね！</DialogContentText>
-							<TextField
-								margin={"dense"} fullWidth rows={"5"} autoFocus={true} multiline={true}
-								onChange={(e) => this.props.changeInputWorryTitleValue(e.target)} value={this.props.formData.inputWorryTitleValue}  />
-							<DialogActions>
-								<Button variant={"contained"} color={"secondary"} onClick={() => this.props.inputWorryValueSubmit(this.props.formData.inputWorryTitleValue)} >相談する</Button>
-							</DialogActions>
-						</DialogContent>
-					</Dialog>
+
+					
+					<DialogWithTextField open={this.props.formData.heartUpViewFlag}
+					                     onClose={() => this.props.changeFlag("heartUpViewFlag", false)}
+					                     title={"なんでも相談しちゃおう"} onChange={(e) => this.props.changeInputWorryTitleValue(e.target)} value={this.props.formData.inputWorryTitleValue}
+					                     onClick={() => this.props.inputWorryValueSubmit(this.props.formData.inputWorryTitleValue)} buttonText={"相談する"} message={[]}
+					                     
+					/>
 					
 					<Dialog open={this.props.formData.pleaseLoginFlag} onClose={() => this.props.changeFlag("pleaseLoginFlag", false)}>
 						<DialogTitle>
