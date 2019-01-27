@@ -2,16 +2,18 @@ import React, { Component } from 'react'
 import PageTitle from '../components/PageTitle'
 import { timeToInterval } from "../Utility/common";
 import Button from '@material-ui/core/Button'
-import { withStyles } from '@material-ui/core'
+import {Snackbar, withStyles} from '@material-ui/core'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import TextField from '@material-ui/core/TextField'
 import DialogActions from '@material-ui/core/DialogActions';
-import Snackbar from "@material-ui/core/Snackbar";
-import SnackbarContent from '@material-ui/core/SnackbarContent'
-import green from "@material-ui/core/colors/green";
+import green from '@material-ui/core/colors/green'
+import red from '@material-ui/core/colors/red';
+
+import { AlertSnackBar } from './Molecules/AlertSnackBar'
+import { DialogWithTextField } from "./Molecules/DialogWithTextField";
 
 
 const styles = ({
@@ -76,56 +78,50 @@ class WorryPage extends Component {
 					comment
 				</Button>
 				
-				<Dialog
-					fullWidth maxWidth={"sm"}
-					open={this.props.flagList.openSendCommentViewFlag}
-					onClose={() => this.props.changeFlagList("openSendCommentViewFlag", false)}
-				>
-					<DialogTitle>
-						コメントを入力してね！
-					</DialogTitle>
-					
-					<DialogContent>
-						{this.props.commentManagement.commentMessage.length > 0 ? <p>{this.props.commentManagement.commentMessage[0]}</p> : <p></p>}
-						<TextField
-							margin={"dense"} fullWidth rows={5} autoFocus={true} multiline={true}
-							onChange={(e) => this.props.changeCommentValue(e.target.value)} value={this.props.commentManagement.commentValue}
-						></TextField>
-						<DialogActions>
-						  <Button variant={"contained"} color={"secondary"} onClick={() => {}}>submit</Button>
-						</DialogActions>
-					</DialogContent>
-				</Dialog>
+				<DialogWithTextField open={this.props.flagList.openSendCommentViewFlag}
+				  onClose={() => this.props.changeFlagList("openSendCommentViewFlag", false)}
+				  title={"コメントを入力してね"} onChange={(e) => this.props.changeCommentValue(e.target.value)} value={this.props.commentManagement.commentValue}
+				  onClick={() => {}} buttonText={"submit"} message={this.props.commentManagement.commentMessage}
+				/>
 				
-				{/*<Snackbar*/}
-				{/*	anchorOrigin={{*/}
-				{/*		horizontal: "center",*/}
-				{/*		vertical: "top"*/}
-				{/*	}}*/}
-				{/*	open={this.props.flagList.commentSubmitSuccessFlag}*/}
-				{/*	autoHideDuration={1000}*/}
-				{/*	onClose={() => this.props.changeFlagList("commentSubmitSuccessFlag", false)}*/}
+				
+				{/*<Dialog*/}
+				{/*	fullWidth maxWidth={"sm"}*/}
+				{/*	open={this.props.flagList.openSendCommentViewFlag}*/}
+				{/*	onClose={() => this.props.changeFlagList("openSendCommentViewFlag", false)}*/}
 				{/*>*/}
+				{/*	<DialogTitle>*/}
+				{/*		コメントを入力してね！*/}
+				{/*	</DialogTitle>*/}
 				{/*	*/}
-				{/*	<SnackbarContent*/}
-				{/*		style={{backgroundColor: green[500]}}*/}
-				{/*		message={<span>送信に成功しました</span>}*/}
-				{/*	/>*/}
-				{/*</Snackbar>*/}
-				{/*<Snackbar*/}
-				{/*	anchorOrigin={{*/}
-				{/*		horizontal: "center",*/}
-				{/*		vertical: "top"*/}
-				{/*	}}*/}
-				{/*	open={this.props.flagList.connectServerFailureFlag}*/}
-				{/*	autoHideDuration={2000}*/}
-				{/*	onClose={() => this.props.changeFlagList("connectServerFailureFlag", false)}*/}
-				{/*>*/}
-				{/*	<SnackbarContent*/}
-				{/*		message={<span id={"message_id"}>サーバーへの送信に失敗しました。電波が悪いか、サーバーの調子がおかしい可能性があります</span>}*/}
-				{/*		style={{backgroundColor: "red"}}*/}
-				{/*	/>*/}
-				{/*</Snackbar>*/}
+				{/*	<DialogContent>*/}
+				{/*		{this.props.commentManagement.commentMessage.length > 0 ? <p>{this.props.commentManagement.commentMessage[0]}</p> : <p></p>}*/}
+				{/*		<TextField*/}
+				{/*			margin={"dense"} fullWidth rows={5} autoFocus={true} multiline={true}*/}
+				{/*			onChange={(e) => this.props.changeCommentValue(e.target.value)} value={this.props.commentManagement.commentValue}*/}
+				{/*		></TextField>*/}
+				{/*		<DialogActions>*/}
+				{/*		  <Button variant={"contained"} color={"secondary"} onClick={() => {}}>submit</Button>*/}
+				{/*		</DialogActions>*/}
+				{/*	</DialogContent>*/}
+				{/*</Dialog>*/}
+				
+				<AlertSnackBar
+					open={this.props.flagList.commentSubmitSuccessFlag}
+					onClose={() => this.props.changeFlagList("commentSubmitSuccessFlag", false)}
+					backColor={green[500]}
+				>
+					送信に成功しました!
+				</AlertSnackBar>
+				
+				<AlertSnackBar
+					open={this.props.flagList.connectServerFailureFlag}
+					onClose={() => this.props.changeFlagList("connectServerFailureFlag", false)}
+					backColor={red[500]}
+				>
+					サーバーへの送信に失敗しました。電波が悪いか、サーバーの調子がおかしい可能性があります
+				</AlertSnackBar>
+				
 			</div>
 		)
 	}
