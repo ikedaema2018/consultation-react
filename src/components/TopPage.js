@@ -33,12 +33,6 @@ const styles = ({
 		bottom: 50,
 		right: 50
 	},
-	success: {
-		backgroundColor: "#008000"
-	},
-	error: {
-		backgroundColor: red[500]
-	},
 	card: {
 		// margin: "2em 2em 2em 2em",
 		// height: "9em"
@@ -150,21 +144,12 @@ class TopPage extends Component {
 					  投稿に成功しました
 					</AlertSnackBar>
 					
-					
-					<Snackbar
-					  anchorOrigin={{
-					  	horizontal: "center",
-						  vertical: "top"
-					  }}
-					  open={this.props.formData.sendWorryFailure}
-					  autoHideDuration={1000}
+					<AlertSnackBar open={this.props.formData.sendWorryFailure}
 					  onClose={() => this.props.changeFlag("sendWorryFailure", false)}
-					  >
-						<SnackbarContent
-							message={<span id={"message_id"}>悩みの送信に失敗しました。電波が悪いか、サーバーの調子がおかしい可能性があります</span>}
-							className={this.props.classes.error}
-						/>
-					</Snackbar>
+					  backColor={red[500]}
+					>
+						悩みの送信に失敗しました。電波が悪いか、サーバーの調子がおかしい可能性があります
+					</AlertSnackBar>
 				</div>
 			</div>
 		)
