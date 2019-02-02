@@ -108,24 +108,21 @@ export const topPageReducer = (state = initialState, action) => {
 				return state
 			}
 			
-			//switch文の中で使うためにコピー
-			var worryDataArray = state.worryData.worryDataArray
+			var worryData;
 			
 			switch (action.payload.sortValue) {
 				case sortDataEnum.NEW:
-					worryDataArray.sort((a, b) => {
+					worryData = state.worryData.worryDataArray.slice().sort((a, b) => {
 						return b.id - a.id
 					})
-					worryData = worryDataArray
 					break
 				case sortDataEnum.OLD:
-					worryDataArray.sort((a, b) => {
+					worryData = state.worryData.worryDataArray.slice().sort((a, b) => {
 						return a.id - b.id
 					})
-					worryData = worryDataArray
 					break
 				default:
-					worryData = worryDataArray
+					worryData = state.worryData.worryDataArray
 					break
 			}
 			
