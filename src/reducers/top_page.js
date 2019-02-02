@@ -1,4 +1,8 @@
-import {sendWorrySuccess} from "../actions/top_page";
+
+const sortDataEnum = {
+	NEW: "new",
+	OLD: "old"
+}
 
 const initialState = {
 	formData: {
@@ -12,8 +16,21 @@ const initialState = {
 	worryData: {
 		worryDataArray: [],
 		worryLoadFlag: false
-	}
+	},
+	sortData: sortDataEnum.NEW
 }
+
+const sortData = (data) => {
+	if (data.length <= 1) {
+		return
+	}
+	
+	data.sort((a, b) => {
+		return b.id - a.id
+	})
+}
+
+
 
 export const topPageReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -79,6 +96,44 @@ export const topPageReducer = (state = initialState, action) => {
 					[action.payload.flagName]:  action.payload.bool
 				}
 			}
+			
+		case "RESET_STATE_TOPPAGE":
+			return initialState
+		
+		case "CHANGE_SORT_TYPE":
+			
+			var worryData;
+			
+			if (state.worryData.worryDataArray <= 1) {
+				return state
+			}
+			
+			var worryData;
+			
+			switch (action.payload.sortValue) {
+				case sortDataEnum.NEW:
+					worryData = state.worryData.worryDataArray.slice().sort((a, b) => {
+						return b.id - a.id
+					})
+					break
+				case sortDataEnum.OLD:
+					worryData = state.worryData.worryDataArray.slice().sort((a, b) => {
+						return a.id - b.id
+					})
+					break
+				default:
+					worryData = state.worryData.worryDataArray
+					break
+			}
+			
+			return {
+				...state,
+				worryData: {
+					...state.worryData,
+					worryDataArray: worryData
+				}
+			}
+			
 		
 		default:
 			return state

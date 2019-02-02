@@ -17,7 +17,6 @@ class PageTitle extends Component {
 				<div  className={"register-title-block"} >
 					<h1 className={"register-title"}>{this.props.title}</h1>
 				</div>
-				<Divider light={true} variant={"middle"}></Divider>
 			</div>
 		)
 	}

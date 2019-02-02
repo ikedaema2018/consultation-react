@@ -42,6 +42,13 @@ export const loginAction = (info) => {
 	return (dispatch) => {
 		dispatch(loadLogin())
 		
+		let sleep = (msec) => new Promise(resolve => setTimeout(resolve, msec))
+		async function oneSecWait() {
+			await sleep(1200)
+			dispatch(toggleFlag("loadFlag", false))
+		}
+		oneSecWait()
+		
 		axios.post(url, info)
 			.then((res) => {
 				localStorage.setItem('user_name', res.data.name)

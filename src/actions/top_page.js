@@ -31,6 +31,11 @@ export const disPlayPostView = () => {
 	}
 }
 
+export const resetState = () => ({
+	type: "RESET_STATE_TOPPAGE",
+	payload: {}
+})
+
 export const pageTransition = (path) => {
 	return (dispatch) => {
 		dispatch(push(path))
@@ -68,6 +73,13 @@ export const changeWorryFlag = (flagName, bool) => ({
 	}
 })
 
+export const changeSort = (sort) => ({
+	type: "CHANGE_SORT_TYPE",
+	payload: {
+		sortValue: sort.value
+	}
+})
+
 
 export const receiveWorryData = () => {
 	return (dispatch) => {
@@ -85,12 +97,6 @@ export const receiveWorryData = () => {
 
 
 export const inputWorryValueSubmit = (value) => {
-	// ログイン認証できてなかったら終わり
-	// if (!localStorage.getItem('auth_token')) {
-	// 	return (dispatch) => {
-	// 		dispatch(changeFlag("pleaseLoginFlag", true))
-	// 	}
-	// }
 	
 	let data = {worry : {worry: value}, auth_token: localStorage.getItem("auth_token")}
 	
@@ -102,10 +108,11 @@ export const inputWorryValueSubmit = (value) => {
 			dispatch(sendWorrySuccess())
 				const sleep = msec => new Promise(resolve => setTimeout(resolve, msec))
 				async function oneSecWait() {
-				await sleep(1000);
-				dispatch(finishWorrySending())
+					await sleep(1000);
+					dispatch(finishWorrySending())
 				}
 				oneSecWait()
+				dispatch(receiveWorryData())
 		})
 			.catch((err) => {
 			dispatch(sendWorryFailure())

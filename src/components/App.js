@@ -3,7 +3,9 @@ import RegisterInfos from '../containers/register_infos.js'
 import Login from '../containers/login.js'
 import AppHeader from '../containers/app_header.js'
 import TopPage from '../containers/top_page.js'
-import { Switch, Route} from 'react-router-dom';
+import WorryPage from '../containers/worry_page.js'
+import {Switch, Route} from 'react-router-dom';
+import '../css/reset.css'
 
 class App extends Component {
 
@@ -14,6 +16,7 @@ class App extends Component {
         <Switch>
           <Route path={"/login"} component={Login}></Route>
           <Route path={"/register"} component={RegisterInfos}/>
+          <Route path={"/worry/:id"} component={WorryPage}/>
           <Route path={"/"} component={TopPage} />
         </Switch>
       </div>
