@@ -12,6 +12,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from "@material-ui/core/es/ListItemText/ListItemText";
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import { Link } from 'react-router-dom'
 
 const profileInfos = [
 	{
@@ -22,9 +23,10 @@ const profileInfos = [
 	{
 		id: 2,
 		name: "新規登録",
-		url: "/"
+		url: "/register"
 	}
 ]
+
 
 
 class AppHeader extends Component {
@@ -32,9 +34,9 @@ class AppHeader extends Component {
 	render() {
 		return(
 			<div>
-				<AppBar position={"static"} color={"secondary"}>
+				<AppBar position={"fixed"} color={"secondary"}>
 					<Toolbar>
-						<Typography variant={"title"} align={"center"} color={"inherit"}>Heart Up</Typography>
+						<Typography variant={"title"} align={"center"} color={"inherit"} ><Link to={{pathname: '/'}} style={{textDecoration: "none", color: "inherit"}} classes={"underlineNone"} >Heart up</Link></Typography>
 						
 						<div style={{flexGrow: 1}}></div>
 						<IconButton　onClick={() => this.props.toggleDrawer('profileFlag', true)}>
@@ -74,6 +76,7 @@ class AppHeader extends Component {
 						</Drawer>
 					</Toolbar>
 				</AppBar>
+				<div style={{height: "3em"}}></div>
 				
 				<Dialog aria-labelledby={"alert-dialog-title"} open={this.props.logoutFlag} onClose={() => this.props.toggleDrawer('logoutFlag', false)}>
 				  <DialogTitle id="alert-dialog-title">{ "ログアウトしましたよ！" }</DialogTitle>

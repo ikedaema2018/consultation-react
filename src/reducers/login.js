@@ -45,11 +45,10 @@ export const loginReducer = (state = initialState, action) => {
 				loginFlag: false
 			}
 			
-		case "MODAL_CLOSE":
-			console.log("wadawdawdawdwadawdawdawdadwadw")
+		case "TOGGLE_FLAG":
 			return {
 				...state,
-				loadFlag: false
+				[action.payload.flagName]: action.payload.bool
 			}
 			
 		default:

@@ -43,7 +43,7 @@ export const registerInfosReducer = (state = initialState, action) => {
 		case 'SEND_SUCCESS':
 			if (action.isSuccess){
 				return {
-					...initialState,
+					...state,
 					registerModalFlag: true,
 					registerModalStatus: {
 						isLoading: false,
@@ -60,6 +60,11 @@ export const registerInfosReducer = (state = initialState, action) => {
 						errorMessage: action.errorMessage
 					}
 				}
+			}
+		case 'REGISTER_TOGGLE_FLAG':
+			return {
+				...state,
+				[action.payload.flagName]: action.payload.bool
 			}
 			
 		case 'RESET_STATE':

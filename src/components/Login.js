@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button'
 import Modal from '@material-ui/core/Modal'
 import PropTypes from 'prop-types';
 import '../css/login.css'
-import {Link} from "react-router-dom";
 import PageTitle from './PageTitle.js'
 
 export default class Login extends Component {
@@ -33,7 +32,7 @@ export default class Login extends Component {
 						</Grid>
 					</Grid>
 					
-					<Modal open={this.props.loadFlag} disableBackdropClick={false} onBackdropClick={() => this.props.onModalOut()}>
+					<Modal open={this.props.loadFlag} disableBackdropClick={false} onBackdropClick={() => this.props.toggleFlag('loadFlag', false)}>
 						<div className={"login-modal-style"}>
 							<div className={"login-modal-child"}>
 								{ this.props.loginFlag ? <h3>ログインしました</h3> : <h3>ログインに失敗しました</h3> }

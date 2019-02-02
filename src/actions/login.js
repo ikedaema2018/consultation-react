@@ -26,19 +26,28 @@ export const loginError = () => {
 	}
 }
 
-export const onModalOut = () => {
-	console.log("onModalOut")
-	return {
-		type: "MODAL_CLOSE",
-		payload: {}
+export const toggleFlag = (flagName, bool) => ({
+	type: "TOGGLE_FLAG",
+	payload: {
+		flagName: flagName,
+		bool: bool
 	}
-}
+})
+
+
 
 
 
 export const loginAction = (info) => {
 	return (dispatch) => {
 		dispatch(loadLogin())
+		
+		let sleep = (msec) => new Promise(resolve => setTimeout(resolve, msec))
+		async function oneSecWait() {
+			await sleep(1200)
+			dispatch(toggleFlag("loadFlag", false))
+		}
+		oneSecWait()
 		
 		axios.post(url, info)
 			.then((res) => {

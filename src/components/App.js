@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import RegisterInfos from '../containers/register_infos.js'
 import Login from '../containers/login.js'
 import AppHeader from '../containers/app_header.js'
-import { Switch, Route} from 'react-router-dom';
+import TopPage from '../containers/top_page.js'
+import WorryPage from '../containers/worry_page.js'
+import {Switch, Route} from 'react-router-dom';
+import '../css/reset.css'
 
 class App extends Component {
 
@@ -12,7 +15,9 @@ class App extends Component {
         <AppHeader />
         <Switch>
           <Route path={"/login"} component={Login}></Route>
-          <Route path="/" component={RegisterInfos}/>
+          <Route path={"/register"} component={RegisterInfos}/>
+          <Route path={"/worry/:id"} component={WorryPage}/>
+          <Route path={"/"} component={TopPage} />
         </Switch>
       </div>
     );

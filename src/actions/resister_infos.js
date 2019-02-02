@@ -23,12 +23,13 @@ export const resetState = () => ({
 	payload: {}
 })
 
-
-//
-// export function sendRegisterInfo(userInfo) {
-// 	console.log(userInfo)
-// }
-
+export const registerToggleFlag = (flagName, bool) => ({
+	type: "REGISTER_TOGGLE_FLAG",
+	payload: {
+		flagName: flagName,
+		bool: bool
+	}
+})
 
 
 
