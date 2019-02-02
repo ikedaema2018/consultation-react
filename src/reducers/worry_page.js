@@ -5,6 +5,7 @@ const initialState = {
 		commentSubmitSuccessFlag: false,
 		connectServerFailureFlag: false,
 		submitLoadFlag: false,
+		pleaseLoginFlag: false
 	},
 	worryData: {
 		worry: {},
@@ -51,6 +52,22 @@ export const worryPageReducer = (state = initialState, action) => {
 					commentValue: action.payload.value
 				}
 			}
+		case "SUCCESS_WORRY_COMMENT_SUBMIT":
+			return {
+				...state,
+				commentManagement: {
+					...state.commentManagement,
+					commentValue: ""
+				},
+				flagList: {
+					...state.flagList,
+					submitLoadFlag: false,
+					commentSubmitSuccessFlag: true,
+				}
+			}
+		case "RESET_STATE_WORRY_PAGE":
+			return initialState
+			
 		default:
 			return state
 	}

@@ -1,14 +1,6 @@
 import React, { Component } from 'react'
 import PageTitle from '../components/PageTitle.js'
 import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogActions from '@material-ui/core/DialogActions'
-import TextField from '@material-ui/core/TextField'
-import Snackbar from '@material-ui/core/Snackbar'
-import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Grid from "@material-ui/core/Grid"
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -20,10 +12,11 @@ import '../css/top_page.css'
 import green from '@material-ui/core/colors/green'
 import red from '@material-ui/core/colors/red';
 import pink from '@material-ui/core/colors/pink';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
 import { AlertSnackBar } from './Molecules/AlertSnackBar/index.js'
 import { DialogWithTextField } from "./Molecules/DialogWithTextField";
-
+import { LoginDialog } from './Molecules/LoginDialog'
 import { timeToInterval } from "../Utility/common";
 
 
@@ -51,12 +44,21 @@ const styles = ({
 	}
 })
 
+const sortDataEnum = {
+	NEW: "new",
+	OLD: "old"
+}
+
 
 
 class TopPage extends Component {
 	
 	componentWillMount(): void {
 	  this.props.receiveWorryData()
+	}
+	
+	componentWillUnmount(): void {
+		this.props.resetState()
 	}
 	
 	// UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
@@ -71,11 +73,29 @@ class TopPage extends Component {
 	render() {
 		return (
 			<div>
+				<Grid container={true}>
+					<Grid item sm={8}>
+						<PageTitle title={"みんなの悩みを投稿してね！"} />
+					</Grid>
+					<Grid style={{position: "relative"}} item sm={4}>
+						<NativeSelect
+							style={{position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)", minWidth: "12em"}}
+							inputProps={{
+								name: 'sort',
+								id: 'sort-simple'
+							}}
+							onChange={(e) => this.props.changeSort(e.target)}
+						>
+							<option value={sortDataEnum.NEW}>投稿新しい順</option>
+							<option value={sortDataEnum.OLD}>投稿古い順</option>
+						</NativeSelect>
+					</Grid>
+				</Grid>
 				
-				<PageTitle title={"みんなの悩みを投稿してね！"} />
+				
 				{this.props.worryData.worryLoadFlag ? <h1>データの取得中です。</h1> : ""}
 				
-				<div style={{paddingLeft: "1em", paddingRight: "1em", backgroundColor: pink[50], height: "100vh"}}>
+				<div style={{paddingLeft: "1em", paddingRight: "1em", backgroundColor: pink[50], minHeight: "100vh"}}>
 					<Grid container={true} spacing={32}>
 						{this.props.worryData.worryDataArray.map(data => (
 							<Grid key={data.id} item={true} xs={3}>
@@ -114,8 +134,6 @@ class TopPage extends Component {
 				
 				
 				<div>
-
-					
 					<DialogWithTextField open={this.props.formData.heartUpViewFlag}
 					                     onClose={() => this.props.changeFlag("heartUpViewFlag", false)}
 					                     title={"なんでも相談しちゃおう"} onChange={(e) => this.props.changeInputWorryTitleValue(e.target)} value={this.props.formData.inputWorryTitleValue}
@@ -123,16 +141,12 @@ class TopPage extends Component {
 					                     
 					/>
 					
-					<Dialog open={this.props.formData.pleaseLoginFlag} onClose={() => this.props.changeFlag("pleaseLoginFlag", false)}>
-						<DialogTitle>
-							悩みを投稿する前にログインしてね！
-						</DialogTitle>
-						<DialogActions>
-							<Button variant={"contained"} color={"default"} onClick={() => this.props.changeFlag("pleaseLoginFlag", false)}>閉じる</Button>
-							<div style={{flexGrow: 1}}></div>
-							<Button variant={"contained"} color={"secondary"} onClick={() => this.props.pageTransition('login')}>ログイン</Button>
-						</DialogActions>
-					</Dialog>
+					<LoginDialog
+						open={this.props.formData.pleaseLoginFlag} onClose={() => this.props.changeFlag("pleaseLoginFlag", false)}
+						title={"悩みを投稿する前にログインしてね"} dialogClose={() => this.props.changeFlag("pleaseLoginFlag", false)}
+						loginAction={() => this.props.pageTransition('login')}
+					></LoginDialog>
+					
 					
 					<AlertSnackBar open={this.props.formData.sendWorrySuccess}
 					  onClose={() => this.props.changeFlag("sendWorrySuccess", false)}

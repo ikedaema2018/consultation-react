@@ -1,4 +1,9 @@
 
+const sortDataEnum = {
+	NEW: "new",
+	OLD: "old"
+}
+
 const initialState = {
 	formData: {
 		heartUpViewFlag: false,
@@ -11,8 +16,21 @@ const initialState = {
 	worryData: {
 		worryDataArray: [],
 		worryLoadFlag: false
-	}
+	},
+	sortData: sortDataEnum.NEW
 }
+
+const sortData = (data) => {
+	if (data.length <= 1) {
+		return
+	}
+	
+	data.sort((a, b) => {
+		return b.id - a.id
+	})
+}
+
+
 
 export const topPageReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -78,6 +96,47 @@ export const topPageReducer = (state = initialState, action) => {
 					[action.payload.flagName]:  action.payload.bool
 				}
 			}
+			
+		case "RESET_STATE_TOPPAGE":
+			return initialState
+		
+		case "CHANGE_SORT_TYPE":
+			
+			var worryData;
+			
+			if (state.worryData.worryDataArray <= 1) {
+				return state
+			}
+			
+			//switch文の中で使うためにコピー
+			var worryDataArray = state.worryData.worryDataArray
+			
+			switch (action.payload.sortValue) {
+				case sortDataEnum.NEW:
+					worryDataArray.sort((a, b) => {
+						return b.id - a.id
+					})
+					worryData = worryDataArray
+					break
+				case sortDataEnum.OLD:
+					worryDataArray.sort((a, b) => {
+						return a.id - b.id
+					})
+					worryData = worryDataArray
+					break
+				default:
+					worryData = worryDataArray
+					break
+			}
+			
+			return {
+				...state,
+				worryData: {
+					...state.worryData,
+					worryDataArray: worryData
+				}
+			}
+			
 		
 		default:
 			return state

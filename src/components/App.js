@@ -5,6 +5,7 @@ import AppHeader from '../containers/app_header.js'
 import TopPage from '../containers/top_page.js'
 import WorryPage from '../containers/worry_page.js'
 import {Switch, Route} from 'react-router-dom';
+import '../css/reset.css'
 
 class App extends Component {
 
