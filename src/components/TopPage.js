@@ -118,7 +118,7 @@ class TopPage extends Component {
 										<div style={{flexGrow: "1"}}></div>
 										
 										<CardActions>
-											<Button size={"small"} className={this.props.classes.cardButton} onClick={() => this.props.pageTransition("/worry/" + data.id)}>みる</Button>
+											<Button variant={"contained"} size={"small"} className={this.props.classes.cardButton} onClick={() => this.props.pageTransition("/worry/" + data.id)}>みる</Button>
 										</CardActions>
 									</div>
 								</Card>
