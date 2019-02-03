@@ -55,7 +55,7 @@ class TopPage extends Component {
 	
 	componentWillMount(): void {
 		this.props.receiveWorryData()
-		this.props.logsAAA()
+		this.props.fetchDataEveryMinute()
 	}
 	
 	
