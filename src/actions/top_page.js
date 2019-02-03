@@ -22,6 +22,7 @@ export const disPlayPostView = () => {
 			dispatch(changeFlag("pleaseLoginFlag", true))
 		}
 	}
+	
 	return {
 		type: "CHANGE_FORM_FLAG",
 		payload: {
@@ -117,5 +118,30 @@ export const inputWorryValueSubmit = (value) => {
 			.catch((err) => {
 			dispatch(sendWorryFailure())
 		})
+	}
+}
+
+//何も返さないアクション
+export const empty = () => {
+	return {
+		type: "EMPTY",
+		payload: {}
+	}
+}
+
+//成功したらDataを返すだけのfetchDataエラーハンドリングはなし
+//課題、この中でdispatchしなきゃいけない
+function simpleFetchData(dispatch) {
+	axios.get("http://localhost:3000/worry").then((res) => {
+		dispatch(updateWorryData(res.data))
+	}).catch((err) => {
+		dispatch(empty())
+	})
+}
+
+export const fetchDataEveryMinute = () => {
+	return (dispatch) => {
+		dispatch(empty())
+		setInterval(simpleFetchData, 60000, dispatch)
 	}
 }

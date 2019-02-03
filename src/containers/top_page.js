@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import TopPage from '../components/TopPage.js'
-import { changeFlag, changeInputWorryTitleValue, inputWorryValueSubmit, disPlayPostView, pageTransition, receiveWorryData, resetState, changeSort } from "../actions/top_page";
+import { changeFlag, changeInputWorryTitleValue, inputWorryValueSubmit, disPlayPostView, pageTransition, receiveWorryData, resetState, changeSort, fetchDataEveryMinute } from "../actions/top_page";
 
 function mapStateToProps(state) {
   return {
@@ -35,6 +35,9 @@ function mapDispatchToProps(dispatch) {
 	  },
 	  changeSort(sort){
   		dispatch(changeSort(sort))
+	  },
+	  fetchDataEveryMinute(){
+  		dispatch(fetchDataEveryMinute())
 	  }
   }
 }
