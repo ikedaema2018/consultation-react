@@ -25,7 +25,7 @@ const styles = ({
 	},
 	mainCard: {
 		margin: "auto",
-		marginBottom: "10vh"
+		marginBottom: "3vh"
 	}
 })
 
@@ -41,14 +41,12 @@ class WorryPage extends Component {
 	
 	WorryPanel = () => {
 		return (
-			<div>
-				<Grid container={true} justify={"center"}>
-					<Grid item lg={8} sm={12}>
+			<div style={{marginRight: "1em"}}>
 						<Card className={this.props.classes.mainCard}>
 							<CardContent style={{minHeight: "20vh"}}>
 								<Typography>{this.props.worryData.worry.worry}</Typography>
 							</CardContent>
-							<div style={{display: "flex", marginLeft: 10, marginRight: 10}}>
+							<div style={{display: "flex", padding: "1em"}}>
 								<p style={{fontSize: 5}}>{this.props.worryData.worryUser.name}さんの投稿です</p>
 								<div style={{flexGrow: 1}}></div>
 								<p style={{fontSize: 5}}>{this.props.worryData.worry.created_at}</p>
@@ -57,12 +55,12 @@ class WorryPage extends Component {
 						
 						{
 							this.props.worryData.worryComments.map((comment) => (
-								<Paper key={comment.id} style={{margin: 5, padding: 5, marginBottom: "2vh"}}>
-									<Typography>{comment.comment}</Typography>
+								<Paper key={comment.id} square >
+									<Typography style={{padding: "1em"}}>{comment.comment}</Typography>
 									{(() => {
 										let comment_user = this.findUserFromUsers(this.props.worryData.worryCommentUsers, comment.user_id)
 										return (
-											<div style={{display: "flex", marginLeft: 10, marginRight: 10}}>
+											<div style={{display: "flex", padding: "0.3em"}}>
 												<p style={{fontSize: 4}}>{ comment_user ? comment_user.name : "不明なユーザー" }さんのコメント</p>
 												<div style={{flexGrow: 1}}></div>
 												<p style={{fontSize: 4}}>投稿日: {comment.created_at ? timeToInterval(comment.created_at) : "不明"}</p>
@@ -72,8 +70,6 @@ class WorryPage extends Component {
 								</Paper>
 							))
 						}
-					</Grid>
-				</Grid>
 			</div>
 		)
 	}
@@ -84,7 +80,28 @@ class WorryPage extends Component {
 			<div style={{backgroundColor: pink[50], minHeight: "100vh", paddingTop: "2%"}}>
 				
 				{ this.props.flagList.loadCommentFlag ? <h2>コメントのロード中です</h2> : "" }
-				{ this.props.worryData.worry !== {} ? <this.WorryPanel myprop={this.props.worryData} /> : "" }
+				
+				<Grid container={true} style={{height: "88vh"}}>
+					<Grid item lg={3} sm={0} style={{height: "100%"}}>
+						<Card style={{marginRight: "1em", marginLeft: "1em", height: "100%"}}>
+							工事中です
+						</Card>
+					</Grid>
+					<Grid item lg={9} sm={12}>
+						{ this.props.worryData.worry !== {} ? <this.WorryPanel myprop={this.props.worryData} /> : "" }
+					</Grid>
+				</Grid>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			
 				<Button
 					variant={"contained"} color={"secondary"} className={this.props.classes.fixed}

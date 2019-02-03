@@ -132,20 +132,16 @@ export const empty = () => {
 //成功したらDataを返すだけのfetchDataエラーハンドリングはなし
 //課題、この中でdispatchしなきゃいけない
 function simpleFetchData(dispatch) {
-	console.log("dispatch")
-	console.log(dispatch)
 	axios.get("http://localhost:3000/worry").then((res) => {
 		dispatch(updateWorryData(res.data))
+	}).catch((err) => {
+		dispatch(empty())
 	})
-		.catch((err) => {
-			console.log(err)
-		})
 }
 
 export const fetchDataEveryMinute = () => {
 	return (dispatch) => {
 		dispatch(empty())
-		console.log("tes")
 		setInterval(simpleFetchData, 60000, dispatch)
 	}
 }
