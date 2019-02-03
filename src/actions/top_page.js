@@ -22,6 +22,7 @@ export const disPlayPostView = () => {
 			dispatch(changeFlag("pleaseLoginFlag", true))
 		}
 	}
+	
 	return {
 		type: "CHANGE_FORM_FLAG",
 		payload: {
@@ -117,5 +118,22 @@ export const inputWorryValueSubmit = (value) => {
 			.catch((err) => {
 			dispatch(sendWorryFailure())
 		})
+	}
+}
+
+//何も返さないアクション
+export const empty = () => {
+	return {
+		type: "EMPTY",
+		payload: {}
+	}
+}
+export const logsAAA = () => {
+	return (dispatch) => {
+		dispatch(empty())
+		function aaa() {
+			console.log("aaa")
+		}
+		setInterval(aaa, 1000)
 	}
 }
